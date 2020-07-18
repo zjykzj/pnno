@@ -35,3 +35,23 @@ _C.YOLOV5.SRC_DIR = ''
 _C.YOLOV5.DST_DIR = ''
 _C.YOLOV5.IMG_EXTENSION = '.png'
 _C.YOLOV5.ANNO_EXTENSION = '.txt'
+
+# ---------------------------------------------------------------------------- #
+# TLT
+# ---------------------------------------------------------------------------- #
+
+_C.TLT = CN()
+_C.TLT.SRC_DIR = ''
+_C.TLT.DST_DIR = ''
+_C.TLT.IMG_EXTENSION = '.png'
+_C.TLT.ANNO_EXTENSION = '.txt'
+
+# ---------------------------------------------------------------------------- #
+# VisDrone
+# ---------------------------------------------------------------------------- #
+
+_C.VISDRONE = CN()
+_C.VISDRONE.SRC_DIR = ''
+_C.VISDRONE.DST_DIR = ''
+_C.VISDRONE.IMG_EXTENSION = '.jpg'
+_C.VISDRONE.ANNO_EXTENSION = '.txt'
