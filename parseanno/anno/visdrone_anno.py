@@ -14,7 +14,7 @@ import cv2
 
 from parseanno.anno import registry
 from parseanno.anno.base_anno import BaseAnno
-from parseanno.utils.utility import is_dir
+from parseanno.utils.utility import is_dir, check
 
 
 @registry.ANNOS.register('visdrone')
@@ -29,6 +29,7 @@ class VisDroneAnno(BaseAnno):
     标注文件（.txt）和图像一一对应，每行表示一个标注对象，共8个字段
     参考[Object Detection in Images](http://aiskyeye.com/evaluate/results-format/). 其格式如下
     <bbox_left>,<bbox_top>,<bbox_width>,<bbox_height>,<score>,<object_category>,<truncation>,<occlusion>
+    在类别中忽略ignored-regions/others
     """
 
     classmap = {'ignored-regions': 0, 'pedestrian': 1, 'people': 2, 'bicycle': 3, 'car': 4, 'van': 5, 'truck': 6,
@@ -43,6 +44,16 @@ class VisDroneAnno(BaseAnno):
     def get_class_name(self, value):
         return [k for k, v in self.classmap.items() if v == value][0]
 
+    def create_anno(self, anno_line) -> dict:
+        # 忽略ignored-regions/others
+        xmin, ymin, width, height, _, cate = anno_line[:6].astype(np.int)
+        xmax = xmin + width
+        ymax = ymin + height
+        if cate == 0 or cate == 11:
+            return dict()
+        name = self.get_class_name(cate)
+        return {'name': name, 'bndbox': [xmin, ymin, xmax, ymax]}
+
     def parse_anno(self, img_path, anno_path) -> dict:
         """
         解析visdrone图像和标注文件
@@ -54,16 +65,21 @@ class VisDroneAnno(BaseAnno):
         h, w = img.shape[:2]
         anno_obj['size'] = (w, h)
 
-        anno_array = np.loadtxt(anno_path, dtype=np.int, delimiter=',')
+        anno_array = np.loadtxt(anno_path, dtype=np.str, delimiter=',')
         objects = list()
-        for anno_line in anno_array:
-            xmin, ymin, width, height, _, cate, _, _ = anno_line
-            xmax = xmin + width
-            ymax = ymin + height
-            name = self.get_class_name(cate)
-            objects.append({'name': name, 'bndbox': [xmin, ymin, xmax, ymax]})
+        if len(anno_array.shape) == 1:
+            # 就一个标注对象
+            obj = self.create_anno(anno_array)
+            if obj:
+                objects.append(obj)
+        else:
+            for anno_line in anno_array:
+                obj = self.create_anno(anno_line)
+                if obj:
+                    objects.append(obj)
+        if len(objects) == 0:
+            return dict()
         anno_obj['objects'] = objects
-
         return anno_obj
 
     def process(self) -> dict:
@@ -80,14 +96,18 @@ class VisDroneAnno(BaseAnno):
 
         img_path_list = sorted(glob.glob(os.path.join(img_dir, '*' + img_extension)))
         anno_path_list = sorted(glob.glob(os.path.join(anno_dir, '*' + anno_extension)))
-        self._check(img_path_list, anno_path_list)
+        check(img_path_list, anno_path_list)
 
         anno_data = dict()
         for i, (img_path, anno_path) in enumerate(zip(img_path_list, anno_path_list), 1):
             if verbose:
                 print('解析{}'.format(anno_path))
 
-            anno_data[img_path] = self.parse_anno(img_path, anno_path)
+            anno_obj = self.parse_anno(img_path, anno_path)
+            if anno_obj:
+                anno_data[img_path] = anno_obj
+            else:
+                print('{}中仅包含标注类型为ignored-regions或者others的目标'.format(img_path))
 
         anno_data['classmap'] = self.classmap
         return anno_data
