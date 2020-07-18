@@ -10,7 +10,7 @@
 import os
 import glob
 
-from parseanno.utils.utility import get_file_name
+from parseanno.utils.utility import check
 from parseanno.utils.parse_voc_xml import ParseVocXml
 from parseanno.anno import registry
 from parseanno.anno.base_anno import BaseAnno
@@ -30,19 +30,17 @@ class LabelImgAnno(BaseAnno):
         self.anno_extension = cfg.LABELIMG.ANNO_EXTENSION
         self.verbose = cfg.ANNO.VERBOSE
 
-    def _check(self, img_path_list, anno_path_list):
-        """
-        检查图像文件和标注文件是否一一对应
-        """
-        assert len(img_path_list) == len(anno_path_list), \
-            '图像文件数：{} - 标注文件数：{}'.format(len(img_path_list), len(anno_path_list))
+        self.classmap = dict()
 
-        for img_path, anno_path in zip(img_path_list, anno_path_list):
-            img_name = get_file_name(img_path)
-            anno_name = get_file_name(anno_path)
+    def _parse_classmap(self, objects):
+        """
+        解析类名，添加对应的数字
+        """
+        for obj in objects:
+            name = obj['name']
 
-            if img_name != anno_name:
-                raise ValueError('{}和{}不对应'.format(img_path, anno_path))
+            if name not in self.classmap.keys():
+                self.classmap[name] = len(self.classmap.keys())
 
     def process(self) -> dict:
         src_dir = self.src_dir
@@ -55,7 +53,7 @@ class LabelImgAnno(BaseAnno):
 
         img_path_list = sorted(glob.glob(os.path.join(src_dir, '*' + img_extension)))
         anno_path_list = sorted(glob.glob(os.path.join(src_dir, '*' + anno_extension)))
-        self._check(img_path_list, anno_path_list)
+        check(img_path_list, anno_path_list)
 
         anno_data = dict()
         for i, (img_path, anno_path) in enumerate(zip(img_path_list, anno_path_list), 1):
@@ -66,10 +64,13 @@ class LabelImgAnno(BaseAnno):
             anno_obj = dict()
             anno_obj['size'] = parser.get_width_height()
             anno_obj['objects'] = parser.get_objects()
-
             anno_data[img_path] = anno_obj
+
+            self._parse_classmap(anno_obj['objects'])
+
+        anno_data['classmap'] = self.classmap
         return anno_data
 
     def save(self, anno_data):
-        super().save(anno_data)
+        super(LabelImgAnno, self).save(anno_data)
         pass

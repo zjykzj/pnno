@@ -1,7 +1,6 @@
 ANNO:
   PARSER: 'labelimg'
   CREATOR: 'yolov5'
-  VERBOSE: True
 LABELIMG:
   SRC_DIR: '/home/zj/桌面/mapcard_labelimg_xml'
 YOLOV5:

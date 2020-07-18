@@ -10,10 +10,11 @@
 import os
 import copy
 import shutil
+import cv2
 import numpy as np
 import json
 
-from parseanno.utils.utility import get_file_name, get_classmap
+from parseanno.utils.utility import get_file_name
 from parseanno.anno import registry
 from parseanno.anno.base_anno import BaseAnno
 
@@ -73,11 +74,13 @@ class YoLoV5Anno(BaseAnno):
         pass
 
     def save(self, anno_data):
-        super().save(anno_data)
+        super(YoLoV5Anno, self).save(anno_data)
 
         dst_dir = self.dst_dir
         save_classmap = self.save_classmap
         verbose = self.verbose
+
+        classmap = anno_data['classmap']
 
         dst_img_dir = os.path.join(dst_dir, 'images')
         dst_label_dir = os.path.join(dst_dir, 'labels')
@@ -90,7 +93,6 @@ class YoLoV5Anno(BaseAnno):
         os.mkdir(dst_img_dir)
         os.mkdir(dst_label_dir)
 
-        classmap = get_classmap(anno_data)
         for i, (img_path, anno_obj) in enumerate(anno_data.items(), 1):
             img_name = get_file_name(img_path)
             if verbose:
@@ -107,10 +109,11 @@ class YoLoV5Anno(BaseAnno):
                 x_center, y_center, box_w, box_h = self.xyxy_2_xywh(bndbox, size)
                 label_list.append([classmap[name], x_center, y_center, box_w, box_h])
             # 保存
+            img = cv2.imread(img_path)
             dst_img_path = os.path.join(dst_img_dir, img_name + self.img_extension)
-            dst_label_path = os.path.join(dst_label_dir, img_name + self.anno_extension)
+            cv2.imwrite(dst_img_path, img)
 
-            shutil.copyfile(img_path, dst_img_path)
+            dst_label_path = os.path.join(dst_label_dir, img_name + self.anno_extension)
             np.savetxt(dst_label_path, label_list, fmt='%d %.6f %.6f %.6f %.6f', delimiter=' ')
         if save_classmap:
             classmap_path = os.path.join(dst_dir, 'classmap.json')
