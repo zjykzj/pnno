@@ -1,7 +1,7 @@
 ANNO:
   PARSER: 'visdrone'
   CREATOR: 'tlt'
-LABELIMG:
-  SRC_DIR: '/home/zj/桌面/mapcard_labelimg_xml'
-YOLOV5:
-  DST_DIR: '/home/zj/桌面/mapcard_yolov5_txt'
+VISDRONE:
+  SRC_DIR: '/home/zj/data/VisDrone2019-DET-train/'
+TLT:
+  DST_DIR: '/home/zj/data/TLT/'
