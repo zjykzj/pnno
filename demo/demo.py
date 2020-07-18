@@ -17,7 +17,8 @@ def main(cfg):
 
 
 if __name__ == '__main__':
-    config_file = '../configs/labelimg_2_yolov5.yaml'
+    # config_file = '../configs/labelimg_2_yolov5.yaml'
+    config_file = '../configs/visdrone_2_tlt.yaml'
     cfg.merge_from_file(config_file)
     cfg.freeze()
 
