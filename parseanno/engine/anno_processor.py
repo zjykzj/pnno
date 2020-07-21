@@ -9,7 +9,9 @@
 
 import os
 import glob
+
 from parseanno.anno import build_anno
+from parseanno.utils.logger import setup_logger
 
 
 class AnnoProcessor(object):
@@ -21,9 +23,11 @@ class AnnoProcessor(object):
         self.parser = build_anno(cfg.ANNO.PARSER, cfg)
         self.creator = build_anno(cfg.ANNO.CREATOR, cfg)
 
+        self.logger = setup_logger(__name__)
+
     def process(self):
-        print('#' * 10, '处理原始标注数据')
+        self.logger.info('处理原始标注数据')
         anno_data = self.parser.process()
-        print('#' * 10, '保存指定格式数据')
+        self.logger.info('保存指定格式数据')
         self.creator.save(anno_data)
-        print('#' * 10, '完成')
+        self.logger.info('完成')
