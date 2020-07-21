@@ -16,6 +16,8 @@ from parseanno.anno.base_anno import BaseAnno
 from parseanno.utils.utility import get_file_name
 from parseanno.anno import registry
 
+from parseanno.utils.logger import setup_logger
+
 
 @registry.ANNOS.register('tlt')
 class TltAnno(BaseAnno):
@@ -41,6 +43,8 @@ class TltAnno(BaseAnno):
         self.anno_extension = cfg.TLT.ANNO_EXTENSION
         self.save_classmap = cfg.ANNO.SAVE_CLASSMAP
         self.verbose = cfg.ANNO.VERBOSE
+
+        self.logger = setup_logger(__name__)
 
     def process(self) -> dict:
         pass
@@ -68,7 +72,7 @@ class TltAnno(BaseAnno):
         for i, (img_path, anno_obj) in enumerate(anno_data['anno_data'].items(), 1):
             img_name = get_file_name(img_path)
             if verbose:
-                print('保存{}'.format(img_name))
+                self.logger.info('保存{}'.format(img_name))
 
             size = anno_obj['size']
             objects = anno_obj['objects']
@@ -88,7 +92,7 @@ class TltAnno(BaseAnno):
             dst_label_path = os.path.join(dst_label_dir, img_name + self.anno_extension)
             np.savetxt(dst_label_path, label_list, fmt='%s', delimiter=' ')
         if save_classmap:
-            print('保存classmap')
+            self.logger.info('保存classmap')
             classmap_path = os.path.join(dst_dir, 'classmap.json')
             with open(classmap_path, 'w') as f:
                 json.dump(classmap, f)

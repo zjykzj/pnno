@@ -15,6 +15,8 @@ from parseanno.utils.parse_voc_xml import ParseVocXml
 from parseanno.anno import registry
 from parseanno.anno.base_anno import BaseAnno
 
+from parseanno.utils.logger import setup_logger
+
 
 @registry.ANNOS.register('labelimg')
 class LabelImgAnno(BaseAnno):
@@ -31,6 +33,8 @@ class LabelImgAnno(BaseAnno):
         self.verbose = cfg.ANNO.VERBOSE
 
         self.classmap = dict()
+
+        self.logger = setup_logger(__name__)
 
     def _parse_classmap(self, objects):
         """
@@ -58,7 +62,7 @@ class LabelImgAnno(BaseAnno):
         anno_data = dict()
         for i, (img_path, anno_path) in enumerate(zip(img_path_list, anno_path_list), 1):
             if verbose:
-                print('解析{}'.format(anno_path))
+                self.logger.info('解析{}'.format(anno_path))
             parser = ParseVocXml(anno_path)
 
             anno_obj = dict()

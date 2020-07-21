@@ -17,6 +17,7 @@ import json
 from parseanno.utils.utility import get_file_name
 from parseanno.anno import registry
 from parseanno.anno.base_anno import BaseAnno
+from parseanno.utils.logger import setup_logger
 
 
 @registry.ANNOS.register('yolov5')
@@ -47,6 +48,8 @@ class YoLoV5Anno(BaseAnno):
         self.anno_extension = cfg.YOLOV5.ANNO_EXTENSION
         self.save_classmap = cfg.ANNO.SAVE_CLASSMAP
         self.verbose = cfg.ANNO.VERBOSE
+
+        self.logger = setup_logger(__name__)
 
     def xyxy_2_xywh(self, bndbox, size):
         """
@@ -96,7 +99,7 @@ class YoLoV5Anno(BaseAnno):
         for i, (img_path, anno_obj) in enumerate(anno_data['anno_data'].items(), 1):
             img_name = get_file_name(img_path)
             if verbose:
-                print('保存{}'.format(img_name))
+                self.logger.info('保存{}'.format(img_name))
 
             size = anno_obj['size']
             objects = anno_obj['objects']
@@ -120,4 +123,4 @@ class YoLoV5Anno(BaseAnno):
             with open(classmap_path, 'w') as f:
                 json.dump(classmap, f)
         if verbose:
-            print(__name__, 'done')
+            self.logger.info(__name__, 'done')

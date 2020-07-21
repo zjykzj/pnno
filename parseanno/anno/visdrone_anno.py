@@ -15,6 +15,7 @@ import cv2
 from parseanno.anno import registry
 from parseanno.anno.base_anno import BaseAnno
 from parseanno.utils.utility import is_dir, check
+from parseanno.utils.logger import setup_logger
 
 
 @registry.ANNOS.register('visdrone')
@@ -40,6 +41,8 @@ class VisDroneAnno(BaseAnno):
         self.img_extension = cfg.VISDRONE.IMG_EXTENSION
         self.anno_extension = cfg.VISDRONE.ANNO_EXTENSION
         self.verbose = cfg.ANNO.VERBOSE
+
+        self.logger = setup_logger(__name__)
 
     def get_class_name(self, value):
         return [k for k, v in self.classmap.items() if v == value][0]
@@ -101,13 +104,13 @@ class VisDroneAnno(BaseAnno):
         anno_data = dict()
         for i, (img_path, anno_path) in enumerate(zip(img_path_list, anno_path_list), 1):
             if verbose:
-                print('解析{}'.format(anno_path))
+                self.logger.info('解析{}'.format(anno_path))
 
             anno_obj = self.parse_anno(img_path, anno_path)
             if anno_obj:
                 anno_data[img_path] = anno_obj
             else:
-                print('{}中仅包含标注类型为ignored-regions或者others的目标'.format(img_path))
+                self.logger.info('{}中仅包含标注类型为ignored-regions或者others的目标'.format(img_path))
 
         return {'classmap': self.classmap, 'anno_data': anno_data}
 
