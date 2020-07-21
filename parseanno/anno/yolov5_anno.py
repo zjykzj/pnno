@@ -93,7 +93,7 @@ class YoLoV5Anno(BaseAnno):
         os.mkdir(dst_img_dir)
         os.mkdir(dst_label_dir)
 
-        for i, (img_path, anno_obj) in enumerate(anno_data.items(), 1):
+        for i, (img_path, anno_obj) in enumerate(anno_data['anno_data'].items(), 1):
             img_name = get_file_name(img_path)
             if verbose:
                 print('保存{}'.format(img_name))

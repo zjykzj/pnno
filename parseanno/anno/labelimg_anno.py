@@ -68,8 +68,7 @@ class LabelImgAnno(BaseAnno):
 
             self._parse_classmap(anno_obj['objects'])
 
-        anno_data['classmap'] = self.classmap
-        return anno_data
+        return {'classmap': self.classmap, 'anno_data': anno_data}
 
     def save(self, anno_data):
         super(LabelImgAnno, self).save(anno_data)

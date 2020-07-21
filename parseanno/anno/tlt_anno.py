@@ -65,7 +65,7 @@ class TltAnno(BaseAnno):
         os.mkdir(dst_img_dir)
         os.mkdir(dst_label_dir)
 
-        for i, (img_path, anno_obj) in enumerate(anno_data.items(), 1):
+        for i, (img_path, anno_obj) in enumerate(anno_data['anno_data'].items(), 1):
             img_name = get_file_name(img_path)
             if verbose:
                 print('保存{}'.format(img_name))
@@ -79,7 +79,7 @@ class TltAnno(BaseAnno):
                 bndbox = obj['bndbox']
 
                 xmin, ymin, xmax, ymax = bndbox
-                label_list.append([name, 0, 0, 0, xmin, ymin, xmax, ymax, 0, 0, 0, 0, 0, 0])
+                label_list.append([name, 0, 0, 0, xmin, ymin, xmax, ymax, 0, 0, 0, 0, 0, 0, 0])
             # 保存
             img = cv2.imread(img_path)
             dst_img_path = os.path.join(dst_img_dir, img_name + self.img_extension)
@@ -88,6 +88,7 @@ class TltAnno(BaseAnno):
             dst_label_path = os.path.join(dst_label_dir, img_name + self.anno_extension)
             np.savetxt(dst_label_path, label_list, fmt='%s', delimiter=' ')
         if save_classmap:
+            print('保存classmap')
             classmap_path = os.path.join(dst_dir, 'classmap.json')
             with open(classmap_path, 'w') as f:
                 json.dump(classmap, f)

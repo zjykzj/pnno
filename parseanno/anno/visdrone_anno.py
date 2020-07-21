@@ -109,8 +109,7 @@ class VisDroneAnno(BaseAnno):
             else:
                 print('{}中仅包含标注类型为ignored-regions或者others的目标'.format(img_path))
 
-        anno_data['classmap'] = self.classmap
-        return anno_data
+        return {'classmap': self.classmap, 'anno_data': anno_data}
 
     def save(self, anno_data):
         super(VisDroneAnno, self).save(anno_data)
