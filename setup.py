@@ -39,4 +39,9 @@ setuptools.setup(
         "License :: OSI Approved :: Apache Software License"
     ],
     python_requires='>=3.6',
+    install_requires=[
+        "yacs >= 0.1.7",
+        "opencv_contrib_python >= 4.2.0",
+        "numpy >= 1.17.2"
+    ]
 )
