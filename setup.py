@@ -43,5 +43,6 @@ setuptools.setup(
         "yacs >= 0.1.7",
         "opencv_contrib_python >= 4.2.0",
         "numpy >= 1.17.2"
-    ]
+    ],
+    scripts=['parseanno/tools/parse-anno.py']
 )
