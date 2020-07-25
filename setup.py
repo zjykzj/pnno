@@ -15,11 +15,11 @@ import shutil
 # ---------------------- #
 # 超参数设置
 NAME = "ParseAnno"
-AUTHOR = 'zj'
-AUTHOR_EMAIL = 'wy163zhuj@163.com'
-DESCRIPTION = 'Script for annotation data processing'
-URL = 'https://github.com/zjZSTU/ParseAnno'
-PYTHON_REQUIRES = 'python>=3.6'
+AUTHOR = "zj"
+AUTHOR_EMAIL = "wy163zhuj@163.com"
+DESCRIPTION = "Script for annotation data processing"
+URL = "https://github.com/zjZSTU/ParseAnno"
+PYTHON_REQUIRES = "python>=3.6"
 INSTALL_REQUIRES = [
     "yacs >= 0.1.7",
     "opencv_contrib_python >= 4.2.0",
