@@ -11,8 +11,8 @@ from parseanno.config import cfg
 from parseanno.engine import AnnoProcessor, default_argument_parser
 
 
-def main(parser):
-    args = parser.parse_args()
+def main():
+    args = default_argument_parser().parse_args()
 
     cfg.merge_from_file(args.config_file)
     cfg.freeze()
@@ -22,4 +22,4 @@ def main(parser):
 
 
 if __name__ == '__main__':
-    main(default_argument_parser())
+    main()

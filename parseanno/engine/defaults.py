@@ -18,5 +18,5 @@ def default_argument_parser():
         argparse.ArgumentParser:
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument("config_file", default="", metavar="FILE", help="path to config file")
+    parser.add_argument("config_file", default="", metavar="CONFIG_FILE", help="path to config file")
     return parser
