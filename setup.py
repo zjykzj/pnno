@@ -26,9 +26,9 @@ INSTALL_REQUIRES = [
     "numpy >= 1.17.2"
 ]
 CLASSIFIERS = [
-    "yacs >= 0.1.7",
-    "opencv_contrib_python >= 4.2.0",
-    "numpy >= 1.17.2"
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+    "License :: OSI Approved :: Apache Software License"
 ]
 
 
