@@ -30,8 +30,6 @@ CLASSIFIERS = [
     "Operating System :: OS Independent",
     "License :: OSI Approved :: Apache Software License"
 ]
-
-
 # ---------------------- #
 
 def get_version():
