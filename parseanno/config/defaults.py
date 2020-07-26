@@ -65,6 +65,7 @@ _C.VISDRONE.ANNO_EXTENSION = '.txt'
 # ---------------------------------------------------------------------------- #
 
 # 处理后的图像文件名
+_C.OUTPUT = CN()
 _C.OUTPUT.IMAGE_FOLDER = 'images'
 # 处理后的标签文件名
 _C.OUTPUT.LABEL_FOLDER = 'labels'
