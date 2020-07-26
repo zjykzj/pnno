@@ -4,9 +4,9 @@ _C = CN()
 
 _C.ANNO = CN()
 # 原始标注
-_C.ANNO.PARSER = 'labelimg'
+_C.ANNO.PARSER = ''
 # 结果标注
-_C.ANNO.CREATOR = 'yolov5'
+_C.ANNO.CREATOR = ''
 # 保存classmap
 _C.ANNO.SAVE_CLASSMAP = True
 # 详细输出
@@ -17,6 +17,7 @@ _C.ANNO.VERBOSE = True
 # ---------------------------------------------------------------------------- #
 
 _C.LABELIMG = CN()
+_C.LABELIMG.NAME = 'labelimg'
 # 根目录 - 作为解析器
 _C.LABELIMG.SRC_DIR = ''
 # 根目录 - 作为保存器
@@ -31,6 +32,7 @@ _C.LABELIMG.ANNO_EXTENSION = '.xml'
 # ---------------------------------------------------------------------------- #
 
 _C.YOLOV5 = CN()
+_C.YOLOV5.NAME = 'yolov5'
 _C.YOLOV5.SRC_DIR = ''
 _C.YOLOV5.DST_DIR = ''
 _C.YOLOV5.IMG_EXTENSION = '.png'
@@ -41,6 +43,7 @@ _C.YOLOV5.ANNO_EXTENSION = '.txt'
 # ---------------------------------------------------------------------------- #
 
 _C.TLT = CN()
+_C.TLT.NAME = 'tlt'
 _C.TLT.SRC_DIR = ''
 _C.TLT.DST_DIR = ''
 _C.TLT.IMG_EXTENSION = '.png'
@@ -51,7 +54,17 @@ _C.TLT.ANNO_EXTENSION = '.txt'
 # ---------------------------------------------------------------------------- #
 
 _C.VISDRONE = CN()
+_C.VISDRONE.NAME = 'visdrone'
 _C.VISDRONE.SRC_DIR = ''
 _C.VISDRONE.DST_DIR = ''
 _C.VISDRONE.IMG_EXTENSION = '.jpg'
 _C.VISDRONE.ANNO_EXTENSION = '.txt'
+
+# ---------------------------------------------------------------------------- #
+# output
+# ---------------------------------------------------------------------------- #
+
+# 处理后的图像文件名
+_C.OUTPUT.IMAGE_FOLDER = 'images'
+# 处理后的标签文件名
+_C.OUTPUT.LABEL_FOLDER = 'labels'
