@@ -18,6 +18,6 @@ def default_argument_parser():
         argparse.ArgumentParser:
     """
     parser = argparse.ArgumentParser()
-    parser.add_argument("--config_file", default="", metavar="CONFIG_FILE", help="path to config file")
-    parser.add_argument('--version', help='output version information', action="store_true")
+    parser.add_argument('-f', "--config_file", default="", metavar="CONFIG_FILE", help="path to config file")
+    parser.add_argument('-v', '--version', help='output version information', action="store_true")
     return parser

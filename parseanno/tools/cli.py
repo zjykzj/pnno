@@ -14,14 +14,16 @@ from parseanno.utils.misc import get_version
 
 
 def main():
-    args = default_argument_parser().parse_args()
+    parser = default_argument_parser()
+    args = parser.parse_args()
 
     if args.version:
         print('ParseAnno: v{}'.format(get_version()))
         sys.exit(0)
 
     if not args.config_file:
-        raise ValueError('A configuration file path is required')
+        parser.print_usage()
+        sys.exit(1)
 
     cfg.merge_from_file(args.config_file)
     cfg.freeze()
