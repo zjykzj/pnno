@@ -56,3 +56,28 @@ def check(img_path_list, anno_path_list):
 
         if img_name != anno_name:
             raise ValueError('{}和{}不对应'.format(img_path, anno_path))
+
+
+def check_dst_folder(dst_dir, dst_image_folder, dst_label_folder):
+    """
+    1. 检查结果根目录dst_dir是否存在：如果不存在，则新建
+    2. 检查结果图像文件夹是否存在：如果存在，抛出异常
+    3. 检查结果标签文件夹是否存在：如果存在，抛出异常
+    :param dst_dir: 结果根目录
+    :param dst_image_folder: 图像文件夹名
+    :param dst_label_folder: 标签文件夹名
+    :return: 返回结果图像文件夹路径以及结果标签文件夹路径
+    """
+    dst_img_dir = os.path.join(dst_dir, dst_image_folder)
+    dst_label_dir = os.path.join(dst_dir, dst_label_folder)
+
+    if not os.path.exists(dst_dir):
+        os.mkdir(dst_dir)
+    if os.path.exists(dst_img_dir):
+        raise ValueError('{}已存在'.format(dst_img_dir))
+    if os.path.exists(dst_label_dir):
+        raise ValueError('{}已存在'.format(dst_label_dir))
+    os.mkdir(dst_img_dir)
+    os.mkdir(dst_label_dir)
+
+    return dst_img_dir, dst_label_dir
