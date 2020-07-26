@@ -13,7 +13,7 @@ import numpy as np
 import json
 
 from parseanno.anno.base_anno import BaseAnno
-from parseanno.utils.utility import get_file_name
+from parseanno.utils.utility import get_file_name, check_dst_folder
 from parseanno.anno import registry
 
 from parseanno.utils.logger import setup_logger
@@ -38,13 +38,21 @@ class TltAnno(BaseAnno):
     """
 
     def __init__(self, cfg):
-        self.dst_dir = cfg.TLT.DST_DIR
         self.img_extension = cfg.TLT.IMG_EXTENSION
         self.anno_extension = cfg.TLT.ANNO_EXTENSION
         self.save_classmap = cfg.ANNO.SAVE_CLASSMAP
         self.verbose = cfg.ANNO.VERBOSE
 
         self.logger = setup_logger(__name__)
+
+        if cfg.ANNO.CREATOR == cfg.YOLOV5.NAME:
+            # 转换成Yolov5数据格式
+            dst_dir = cfg.TLT.DST_DIR
+            dst_img_dir, dst_label_dir = check_dst_folder(dst_dir, cfg.OUTPUT.IMAGE_FOLDER, cfg.OUTPUT.LABEL_FOLDER)
+
+            self.dst_dir = dst_dir
+            self.dst_img_dir = dst_img_dir
+            self.dst_label_dir = dst_label_dir
 
     def process(self) -> dict:
         pass
@@ -53,21 +61,12 @@ class TltAnno(BaseAnno):
         super(TltAnno, self).save(anno_data)
 
         dst_dir = self.dst_dir
+        dst_img_dir = self.dst_img_dir
+        dst_label_dir = self.dst_label_dir
         save_classmap = self.save_classmap
         verbose = self.verbose
 
         classmap = anno_data['classmap']
-
-        dst_img_dir = os.path.join(dst_dir, 'images')
-        dst_label_dir = os.path.join(dst_dir, 'labels')
-        if not os.path.exists(dst_dir):
-            os.mkdir(dst_dir)
-        if os.path.exists(dst_img_dir):
-            raise ValueError('{}已存在'.format(dst_img_dir))
-        if os.path.exists(dst_label_dir):
-            raise ValueError('{}已存在'.format(dst_label_dir))
-        os.mkdir(dst_img_dir)
-        os.mkdir(dst_label_dir)
 
         for i, (img_path, anno_obj) in enumerate(anno_data['anno_data'].items(), 1):
             img_name = get_file_name(img_path)
