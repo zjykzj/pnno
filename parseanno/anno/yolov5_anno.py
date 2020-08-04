@@ -122,4 +122,4 @@ class YoLoV5Anno(BaseAnno):
             with open(classmap_path, 'w') as f:
                 json.dump(classmap, f)
         if verbose:
-            self.logger.info(__name__, 'done')
+            self.logger.info(__name__ + ' done')

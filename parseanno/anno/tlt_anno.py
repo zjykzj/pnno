@@ -96,4 +96,4 @@ class TltAnno(BaseAnno):
             with open(classmap_path, 'w') as f:
                 json.dump(classmap, f)
         if verbose:
-            print(__name__, 'done')
+            print(__name__ + ' done')
