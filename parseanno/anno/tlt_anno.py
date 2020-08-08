@@ -45,7 +45,7 @@ class TltAnno(BaseAnno):
 
         self.logger = setup_logger(__name__)
 
-        if cfg.ANNO.CREATOR == cfg.YOLOV5.NAME:
+        if cfg.ANNO.CREATOR == cfg.TLT.NAME:
             # 转换成Yolov5数据格式
             dst_dir = cfg.TLT.DST_DIR
             dst_img_dir, dst_label_dir = check_dst_folder(dst_dir, cfg.OUTPUT.IMAGE_FOLDER, cfg.OUTPUT.LABEL_FOLDER)
