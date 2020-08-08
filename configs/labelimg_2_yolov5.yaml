@@ -2,6 +2,10 @@ ANNO:
   PARSER: 'labelimg'
   CREATOR: 'yolov5'
 LABELIMG:
-  SRC_DIR: '/home/zj/桌面/mapcard_labelimg_xml'
+  SRC_DIR: 'tests/labelimg_2_yolov5/data-labelimg/'
+  IMG_EXTENSION: '.png'
+  ANNO_EXTENSION: '.xml'
 YOLOV5:
-  DST_DIR: '/home/zj/桌面/mapcard_yolov5_txt'
+  DST_DIR: 'tests/labelimg_2_yolov5/data-yolov5/'
+  IMG_EXTENSION: '.png'
+  ANNO_EXTENSION: '.txt'
