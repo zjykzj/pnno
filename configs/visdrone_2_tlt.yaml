@@ -2,6 +2,10 @@ ANNO:
   PARSER: 'visdrone'
   CREATOR: 'tlt'
 VISDRONE:
-  SRC_DIR: '/home/zj/data/VisDrone2019-DET-train/'
+  SRC_DIR: 'tests/visdrone_2_tlt/data-virdrone/'
+  IMG_EXTENSION: '.jpg'
+  ANNO_EXTENSION: '.txt'
 TLT:
-  DST_DIR: '/home/zj/data/TLT/'
+  DST_DIR: 'tests/visdrone_2_tlt/data-tlt/'
+  IMG_EXTENSION: '.jpg'
+  ANNO_EXTENSION: '.txt'
