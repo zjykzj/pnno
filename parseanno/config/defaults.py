@@ -21,6 +21,8 @@ _C.INPUT = CN()
 _C.INPUT.IMAGE_FOLDER = 'images'
 # 输入的标签数据路径
 _C.INPUT.LABEL_FOLDER = 'labels'
+# 根目录 - 作为解析器
+_C.INPUT.DIR = ''
 
 # ---------------------------------------------------------------------------- #
 # output
@@ -31,6 +33,8 @@ _C.OUTPUT = CN()
 _C.OUTPUT.IMAGE_FOLDER = 'images'
 # 处理后的标签文件名
 _C.OUTPUT.LABEL_FOLDER = 'labels'
+# 根目录 - 作为保存器
+_C.OUTPUT.DIR = ''
 
 # ---------------------------------------------------------------------------- #
 # LabelImg
@@ -38,10 +42,6 @@ _C.OUTPUT.LABEL_FOLDER = 'labels'
 
 _C.LABELIMG = CN()
 _C.LABELIMG.NAME = 'labelimg'
-# 根目录 - 作为解析器
-_C.LABELIMG.SRC_DIR = ''
-# 根目录 - 作为保存器
-_C.LABELIMG.DST_DIR = ''
 # 图像后缀名
 _C.LABELIMG.IMG_EXTENSION = '.png'
 # 标注文件后缀名
@@ -53,8 +53,6 @@ _C.LABELIMG.ANNO_EXTENSION = '.xml'
 
 _C.YOLOV5 = CN()
 _C.YOLOV5.NAME = 'yolov5'
-_C.YOLOV5.SRC_DIR = ''
-_C.YOLOV5.DST_DIR = ''
 _C.YOLOV5.IMG_EXTENSION = '.png'
 _C.YOLOV5.ANNO_EXTENSION = '.txt'
 
@@ -64,8 +62,6 @@ _C.YOLOV5.ANNO_EXTENSION = '.txt'
 
 _C.TLT = CN()
 _C.TLT.NAME = 'tlt'
-_C.TLT.SRC_DIR = ''
-_C.TLT.DST_DIR = ''
 _C.TLT.IMG_EXTENSION = '.png'
 _C.TLT.ANNO_EXTENSION = '.txt'
 
@@ -75,7 +71,5 @@ _C.TLT.ANNO_EXTENSION = '.txt'
 
 _C.VISDRONE = CN()
 _C.VISDRONE.NAME = 'visdrone'
-_C.VISDRONE.SRC_DIR = ''
-_C.VISDRONE.DST_DIR = ''
 _C.VISDRONE.IMG_EXTENSION = '.jpg'
 _C.VISDRONE.ANNO_EXTENSION = '.txt'
