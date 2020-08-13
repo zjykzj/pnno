@@ -14,11 +14,11 @@ import shutil
 
 # ---------------------- #
 # 超参数设置
-NAME = "ParseAnno"
+NAME = "pnno"
 AUTHOR = "zj"
 AUTHOR_EMAIL = "wy163zhuj@163.com"
 DESCRIPTION = "Script for annotation data processing"
-URL = "https://github.com/zjZSTU/ParseAnno"
+URL = "https://github.com/zjykzj/pnno"
 PYTHON_REQUIRES = ">=3.6"
 INSTALL_REQUIRES = [
     "yacs >= 0.1.7",
