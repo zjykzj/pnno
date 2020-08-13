@@ -14,7 +14,7 @@ import cv2
 
 from parseanno.anno import registry
 from parseanno.anno.base_anno import BaseAnno
-from parseanno.utils.utility import is_dir, check
+from parseanno.utils.misc import is_dir, check
 from parseanno.utils.logger import setup_logger
 
 

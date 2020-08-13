@@ -10,7 +10,7 @@
 import os
 import glob
 
-from parseanno.utils.utility import check
+from parseanno.utils.misc import check
 from parseanno.utils.parse_voc_xml import ParseVocXml
 from parseanno.anno import registry
 from parseanno.anno.base_anno import BaseAnno

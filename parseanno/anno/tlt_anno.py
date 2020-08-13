@@ -13,7 +13,7 @@ import numpy as np
 import json
 
 from parseanno.anno.base_anno import BaseAnno
-from parseanno.utils.utility import get_file_name, check_dst_folder
+from parseanno.utils.misc import get_file_name, check_dst_folder
 from parseanno.anno import registry
 
 from parseanno.utils.logger import setup_logger
