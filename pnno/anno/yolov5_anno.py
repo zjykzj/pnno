@@ -15,7 +15,7 @@ import numpy as np
 import json
 
 from pnno.utils.utility import xyxy_2_xywh
-from pnno.utils.misc import get_file_name, check_dst_folder
+from pnno.utils.misc import get_file_name, check_input_output_folder
 from pnno.anno import registry
 from pnno.anno.base_anno import BaseAnno
 from pnno.utils.logger import setup_logger
@@ -26,11 +26,11 @@ class YoLoV5Anno(BaseAnno):
     """
     创建[ultralytics/yolov5](https://github.com/ultralytics/yolov5)训练所需数据集
     其图像和标注文件排列如下：
-    ├── ocr-task3-detect
-       ├── images
+    ├── yolov5-dataset
+        ── images
             ├── 201.png
             ├── 202.png
-       └── labels
+        ── labels
             ├── 201.txt
             ├── 202.txt
     标注文件格式如下：
@@ -44,40 +44,45 @@ class YoLoV5Anno(BaseAnno):
     """
 
     def __init__(self, cfg):
+        self.name = cfg.YOLOV5.NAME
         self.img_extension = cfg.YOLOV5.IMG_EXTENSION
         self.anno_extension = cfg.YOLOV5.ANNO_EXTENSION
-        self.save_classmap = cfg.ANNO.SAVE_CLASSMAP
+
+        if cfg.ANNO.PARSER == self.name:
+            self.src_dir = cfg.INPUT.DIR
+            self.image_folder = cfg.INPUT.IMAGE_FOLDER
+            self.label_folder = cfg.INPUT.LABEL_FOLDER
+        if cfg.ANNO.CREATOR == self.name:
+            self.dst_dir = cfg.OUTPUT.DIR
+            self.image_folder = cfg.OUTPUT.IMAGE_FOLDER
+            self.label_folder = cfg.OUTPUT.LABEL_FOLDER
+
         self.verbose = cfg.ANNO.VERBOSE
 
         self.logger = setup_logger(__name__)
-
-        if cfg.ANNO.CREATOR == cfg.YOLOV5.NAME:
-            # 转换成Yolov5数据格式
-            dst_dir = cfg.YOLOV5.DST_DIR
-            dst_img_dir, dst_label_dir = check_dst_folder(dst_dir, cfg.OUTPUT.IMAGE_FOLDER, cfg.OUTPUT.LABEL_FOLDER)
-
-            self.dst_dir = dst_dir
-            self.dst_img_dir = dst_img_dir
-            self.dst_label_dir = dst_label_dir
+        self.classmap = dict()
 
     def process(self) -> dict:
         pass
 
-    def save(self, anno_data):
-        super(YoLoV5Anno, self).save(anno_data)
+    def save(self, input_data):
+        super(YoLoV5Anno, self).save(input_data)
 
         dst_dir = self.dst_dir
-        dst_img_dir = self.dst_img_dir
-        dst_label_dir = self.dst_label_dir
-        save_classmap = self.save_classmap
+        image_folder = self.image_folder
+        label_folder = self.label_folder
+        img_extension = self.img_extension
+        anno_extension = self.anno_extension
         verbose = self.verbose
+        logger = self.logger
 
-        classmap = anno_data['classmap']
+        dst_image_dir, dst_label_dir = check_input_output_folder(dst_dir, image_folder, label_folder, is_input=False)
 
-        for i, (img_path, anno_obj) in enumerate(anno_data['anno_data'].items(), 1):
+        classmap = input_data['classmap']
+        for i, (img_path, anno_obj) in enumerate(input_data['anno_data'].items(), 1):
             img_name = get_file_name(img_path)
             if verbose:
-                self.logger.info('保存{}'.format(img_name))
+                logger.info('保存{}'.format(img_name))
 
             size = anno_obj['size']
             objects = anno_obj['objects']
@@ -91,14 +96,16 @@ class YoLoV5Anno(BaseAnno):
                 label_list.append([classmap[name], x_center, y_center, box_w, box_h])
             # 保存
             img = cv2.imread(img_path)
-            dst_img_path = os.path.join(dst_img_dir, img_name + self.img_extension)
+            dst_img_path = os.path.join(dst_image_dir, img_name + img_extension)
             cv2.imwrite(dst_img_path, img)
 
-            dst_label_path = os.path.join(dst_label_dir, img_name + self.anno_extension)
+            dst_label_path = os.path.join(dst_label_dir, img_name + anno_extension)
             np.savetxt(dst_label_path, label_list, fmt='%d %.6f %.6f %.6f %.6f', delimiter=' ')
-        if save_classmap:
-            classmap_path = os.path.join(dst_dir, 'classmap.json')
-            with open(classmap_path, 'w') as f:
-                json.dump(classmap, f)
+
         if verbose:
-            self.logger.info(__name__ + ' done')
+            logger.info('保存classmap.json')
+        classmap_path = os.path.join(dst_dir, 'classmap.json')
+        with open(classmap_path, 'w') as f:
+            json.dump(classmap, f)
+        if verbose:
+            logger.info(__name__ + ' done')

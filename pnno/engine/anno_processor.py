@@ -24,10 +24,17 @@ class AnnoProcessor(object):
         self.creator = build_anno(cfg.ANNO.CREATOR, cfg)
 
         self.logger = setup_logger(__name__)
+        self.verbose = cfg.ANNO.VERBOSE
 
     def process(self):
-        self.logger.info('处理原始标注数据')
-        anno_data = self.parser.process()
-        self.logger.info('保存指定格式数据')
-        self.creator.save(anno_data)
-        self.logger.info('完成')
+        verbose = self.verbose
+        logger = self.logger
+
+        if verbose:
+            logger.info('处理原始标注数据')
+        output_data = self.parser.process()
+        if verbose:
+            logger.info('保存指定格式数据')
+        self.creator.save(output_data)
+        if verbose:
+            logger.info('完成')

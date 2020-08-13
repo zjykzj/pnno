@@ -14,7 +14,7 @@ import cv2
 
 from pnno.anno import registry
 from pnno.anno.base_anno import BaseAnno
-from pnno.utils.misc import is_dir, check
+from pnno.utils.misc import check_image_label, check_input_output_folder
 from pnno.utils.logger import setup_logger
 
 
@@ -37,9 +37,19 @@ class VisDroneAnno(BaseAnno):
                 'tricycle': 7, 'awning-tricycle': 8, 'bus': 9, 'motor': 10, 'others': 11}
 
     def __init__(self, cfg):
-        self.src_dir = cfg.VISDRONE.SRC_DIR
+        self.name = cfg.VISDRONE.NAME
         self.img_extension = cfg.VISDRONE.IMG_EXTENSION
         self.anno_extension = cfg.VISDRONE.ANNO_EXTENSION
+
+        if cfg.ANNO.PARSER == self.name:
+            self.src_dir = cfg.INPUT.DIR
+            self.image_folder = cfg.INPUT.IMAGE_FOLDER
+            self.label_folder = cfg.INPUT.LABEL_FOLDER
+        if cfg.ANNO.CREATOR == self.name:
+            self.dst_dir = cfg.OUTPUT.DIR
+            self.image_folder = cfg.OUTPUT.IMAGE_FOLDER
+            self.label_folder = cfg.OUTPUT.LABEL_FOLDER
+
         self.verbose = cfg.ANNO.VERBOSE
 
         self.logger = setup_logger(__name__)
@@ -87,24 +97,23 @@ class VisDroneAnno(BaseAnno):
 
     def process(self) -> dict:
         src_dir = self.src_dir
+        image_folder = self.image_folder
+        label_folder = self.label_folder
         img_extension = self.img_extension
         anno_extension = self.anno_extension
         verbose = self.verbose
+        logger = self.logger
 
-        img_dir = os.path.join(src_dir, 'images')
-        anno_dir = os.path.join(src_dir, 'annotations')
-        is_dir(src_dir)
-        is_dir(img_dir)
-        is_dir(anno_dir)
+        image_dir, label_dir = check_input_output_folder(src_dir, image_folder, label_folder, is_input=True)
 
-        img_path_list = sorted(glob.glob(os.path.join(img_dir, '*' + img_extension)))
-        anno_path_list = sorted(glob.glob(os.path.join(anno_dir, '*' + anno_extension)))
-        check(img_path_list, anno_path_list)
+        img_path_list = sorted(glob.glob(os.path.join(image_dir, '*' + img_extension)))
+        anno_path_list = sorted(glob.glob(os.path.join(label_dir, '*' + anno_extension)))
+        check_image_label(img_path_list, anno_path_list)
 
         anno_data = dict()
         for i, (img_path, anno_path) in enumerate(zip(img_path_list, anno_path_list), 1):
             if verbose:
-                self.logger.info('解析{}'.format(anno_path))
+                logger.info('解析{}'.format(anno_path))
 
             anno_obj = self.parse_anno(img_path, anno_path)
             if anno_obj:
@@ -114,5 +123,6 @@ class VisDroneAnno(BaseAnno):
 
         return {'classmap': self.classmap, 'anno_data': anno_data}
 
-    def save(self, anno_data):
-        super(VisDroneAnno, self).save(anno_data)
+    def save(self, input_data):
+        super(VisDroneAnno, self).save(input_data)
+        pass

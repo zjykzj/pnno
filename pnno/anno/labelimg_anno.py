@@ -82,8 +82,8 @@ class LabelImgAnno(BaseAnno):
 
         return {'classmap': self.classmap, 'anno_data': anno_data}
 
-    def save(self, anno_data):
-        super(LabelImgAnno, self).save(anno_data)
+    def save(self, input_data):
+        super(LabelImgAnno, self).save(input_data)
 
         dst_dir = self.dst_dir
         image_folder = self.image_folder
@@ -95,8 +95,8 @@ class LabelImgAnno(BaseAnno):
 
         dst_image_dir, dst_label_dir = check_input_output_folder(dst_dir, image_folder, label_folder, is_input=False)
 
-        classmap = anno_data['classmap']
-        for i, (img_path, anno_obj) in enumerate(anno_data['anno_data'].items(), 1):
+        classmap = input_data['classmap']
+        for i, (img_path, anno_obj) in enumerate(input_data['anno_data'].items(), 1):
             img_name = get_file_name(img_path)
             if verbose:
                 logger.info('保存{}'.format(img_name))
@@ -145,15 +145,17 @@ class LabelImgAnno(BaseAnno):
                 object_dict['bndbox'] = bndbox_dict
             # 保存
             img = cv2.imread(img_path)
-            dst_img_path = os.path.join(dst_image_dir, img_name + self.img_extension)
+            dst_img_path = os.path.join(dst_image_dir, img_name + img_extension)
             cv2.imwrite(dst_img_path, img)
 
-            dst_label_path = os.path.join(dst_label_dir, img_name + self.anno_extension)
+            dst_label_path = os.path.join(dst_label_dir, img_name + anno_extension)
             annotation_json = json.dumps(annotation_dict, indent=1)
             json_to_xml(annotation_json, dst_label_path)
 
+        if verbose:
+            logger.info('保存classmap.json')
         classmap_path = os.path.join(dst_dir, 'classmap.json')
         with open(classmap_path, 'w') as f:
             json.dump(classmap, f)
         if verbose:
-            self.logger.info(__name__ + ' done')
+            logger.info(__name__ + ' done')

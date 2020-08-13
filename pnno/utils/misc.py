@@ -48,7 +48,7 @@ def get_classmap(anno_data, classmap):
     return classmap
 
 
-def check(img_path_list, anno_path_list):
+def check_image_label(img_path_list, anno_path_list):
     """
     检查图像文件和标注文件是否一一对应
     """
@@ -86,7 +86,7 @@ def check_input_output_folder(dir: str, image_folder: str, label_folder: str, is
 
     if is_input:
         if not os.path.exists(dir) or not os.path.exists(img_dir) or not os.path.exists(label_dir):
-            raise ValueError(''.format(label_dir))
+            raise ValueError('请检查输入数据是否正确')
     else:
         if not os.path.exists(dir):
             os.mkdir(dir)
