@@ -15,7 +15,7 @@ import numpy as np
 from collections import OrderedDict
 
 from pnno.utils.utility import json_to_xml
-from pnno.utils.misc import check, get_file_name, parse_classmap
+from pnno.utils.misc import check_image_label, get_file_name, parse_classmap, check_input_output_folder
 from pnno.utils.parse_voc_xml import ParseVocXml
 from pnno.anno import registry
 from pnno.anno.base_anno import BaseAnno
@@ -34,14 +34,15 @@ class LabelImgAnno(BaseAnno):
     """
 
     def __init__(self, cfg):
+        self.name = cfg.LABELIMG.NAME
         self.img_extension = cfg.LABELIMG.IMG_EXTENSION
         self.anno_extension = cfg.LABELIMG.ANNO_EXTENSION
 
-        if cfg.ANNO.PARSER == 'labelimg':
+        if cfg.ANNO.PARSER == self.name:
             self.src_dir = cfg.INPUT.DIR
             self.image_folder = cfg.INPUT.IMAGE_FOLDER
             self.label_folder = cfg.INPUT.LABEL_FOLDER
-        if cfg.ANNO.CREATOR == 'labelimg':
+        if cfg.ANNO.CREATOR == self.name:
             self.dst_dir = cfg.OUTPUT.DIR
             self.image_folder = cfg.OUTPUT.IMAGE_FOLDER
             self.label_folder = cfg.OUTPUT.LABEL_FOLDER
@@ -60,12 +61,11 @@ class LabelImgAnno(BaseAnno):
         verbose = self.verbose
         logger = self.logger
 
-        if not os.path.isdir(src_dir):
-            raise ValueError('{}不是文件夹'.format(src_dir))
+        image_dir, label_dir = check_input_output_folder(src_dir, image_folder, label_folder, is_input=True)
 
-        img_path_list = sorted(glob.glob(os.path.join(src_dir, '*' + img_extension)))
-        anno_path_list = sorted(glob.glob(os.path.join(src_dir, '*' + anno_extension)))
-        check(img_path_list, anno_path_list)
+        img_path_list = sorted(glob.glob(os.path.join(image_dir, '*' + img_extension)))
+        anno_path_list = sorted(glob.glob(os.path.join(label_dir, '*' + anno_extension)))
+        check_image_label(img_path_list, anno_path_list)
 
         anno_data = dict()
         for i, (img_path, anno_path) in enumerate(zip(img_path_list, anno_path_list), 1):
@@ -84,20 +84,22 @@ class LabelImgAnno(BaseAnno):
 
     def save(self, anno_data):
         super(LabelImgAnno, self).save(anno_data)
-        pass
 
         dst_dir = self.dst_dir
-        dst_img_dir = self.dst_img_dir
-        dst_label_dir = self.dst_label_dir
-        save_classmap = self.save_classmap
+        image_folder = self.image_folder
+        label_folder = self.label_folder
+        img_extension = self.img_extension
+        anno_extension = self.anno_extension
         verbose = self.verbose
+        logger = self.logger
+
+        dst_image_dir, dst_label_dir = check_input_output_folder(dst_dir, image_folder, label_folder, is_input=False)
 
         classmap = anno_data['classmap']
-
         for i, (img_path, anno_obj) in enumerate(anno_data['anno_data'].items(), 1):
             img_name = get_file_name(img_path)
             if verbose:
-                self.logger.info('保存{}'.format(img_name))
+                logger.info('保存{}'.format(img_name))
 
             root_dict = OrderedDict()
             # 根节点
@@ -143,15 +145,15 @@ class LabelImgAnno(BaseAnno):
                 object_dict['bndbox'] = bndbox_dict
             # 保存
             img = cv2.imread(img_path)
-            dst_img_path = os.path.join(dst_img_dir, img_name + self.img_extension)
+            dst_img_path = os.path.join(dst_image_dir, img_name + self.img_extension)
             cv2.imwrite(dst_img_path, img)
 
             dst_label_path = os.path.join(dst_label_dir, img_name + self.anno_extension)
             annotation_json = json.dumps(annotation_dict, indent=1)
             json_to_xml(annotation_json, dst_label_path)
-        if save_classmap:
-            classmap_path = os.path.join(dst_dir, 'classmap.json')
-            with open(classmap_path, 'w') as f:
-                json.dump(classmap, f)
+
+        classmap_path = os.path.join(dst_dir, 'classmap.json')
+        with open(classmap_path, 'w') as f:
+            json.dump(classmap, f)
         if verbose:
             self.logger.info(__name__ + ' done')

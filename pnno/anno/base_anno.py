@@ -17,6 +17,6 @@ class BaseAnno(metaclass=ABCMeta):
         pass
 
     @abstractmethod
-    def save(self, anno_data: dict):
-        assert isinstance(anno_data, dict)
+    def save(self, input_data: dict):
+        assert isinstance(input_data, dict)
         pass
