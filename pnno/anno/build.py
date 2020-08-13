@@ -7,7 +7,7 @@
 @description: 
 """
 
-from parseanno.anno import registry
+from pnno.anno import registry
 from .yolov5_anno import YoLoV5Anno
 from .labelimg_anno import LabelImgAnno
 from .visdrone_anno import VisDroneAnno

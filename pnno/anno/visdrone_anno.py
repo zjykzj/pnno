@@ -12,10 +12,10 @@ import glob
 import numpy as np
 import cv2
 
-from parseanno.anno import registry
-from parseanno.anno.base_anno import BaseAnno
-from parseanno.utils.misc import is_dir, check
-from parseanno.utils.logger import setup_logger
+from pnno.anno import registry
+from pnno.anno.base_anno import BaseAnno
+from pnno.utils.misc import is_dir, check
+from pnno.utils.logger import setup_logger
 
 
 @registry.ANNOS.register('visdrone')

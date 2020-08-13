@@ -7,6 +7,6 @@
 @description: 
 """
 
-from parseanno.utils.registry import Registry
+from pnno.utils.registry import Registry
 
 ANNOS = Registry()

@@ -7,14 +7,14 @@
 @description: 
 """
 
-import parseanno
+import pnno
 import cv2
 import os
 import glob
 
 
 def get_version():
-    return parseanno.__version__
+    return pnno.__version__
 
 
 def is_dir(src_dir):

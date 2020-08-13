@@ -10,8 +10,8 @@
 import os
 import glob
 
-from parseanno.anno import build_anno
-from parseanno.utils.logger import setup_logger
+from pnno.anno import build_anno
+from pnno.utils.logger import setup_logger
 
 
 class AnnoProcessor(object):
