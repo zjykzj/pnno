@@ -99,7 +99,7 @@ setuptools.setup(
     # scripts=['pnno/tools/cli.py']
     entry_points={
         'console_scripts': [
-            'parse-anno=pnno.tools.cli:main'
+            'pnno=pnno.tools.cli:main'
         ]
     },
     cmdclass={
