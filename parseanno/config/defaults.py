@@ -7,8 +7,6 @@ _C.ANNO = CN()
 _C.ANNO.PARSER = ''
 # 结果标注
 _C.ANNO.CREATOR = ''
-# 保存classmap
-_C.ANNO.SAVE_CLASSMAP = True
 # 详细输出
 _C.ANNO.VERBOSE = True
 
