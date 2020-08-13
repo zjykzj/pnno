@@ -63,26 +63,51 @@ def check(img_path_list, anno_path_list):
             raise ValueError('{}和{}不对应'.format(img_path, anno_path))
 
 
-def check_dst_folder(dst_dir, dst_image_folder, dst_label_folder):
+def check_input_output_folder(dir: str, image_folder: str, label_folder: str, is_input: bool):
     """
-    1. 检查结果根目录dst_dir是否存在：如果不存在，则新建
-    2. 检查结果图像文件夹是否存在：如果存在，抛出异常
-    3. 检查结果标签文件夹是否存在：如果存在，抛出异常
-    :param dst_dir: 结果根目录
-    :param dst_image_folder: 图像文件夹名
-    :param dst_label_folder: 标签文件夹名
-    :return: 返回结果图像文件夹路径以及结果标签文件夹路径
+    检查根目录以及图像和标签文件夹
+    检查输入目录
+    1. 检查根路径是否存在：如果不存在，抛出异常
+    2. 检查图像文件夹是否存在：如果不存在，抛出异常
+    3. 检查标签文件夹是否存在：如果不存在，抛出异常
+    检查输出目录
+    1. 检查根路径是否存在：如果不存在，则新建
+    2. 检查图像文件夹是否存在：如果存在，抛出异常
+    3. 检查标签文件夹是否存在：如果存在，抛出异常
+    :param dir: 根路径
+    :param image_folder: 图像文件夹名
+    :param label_folder: 标签文件夹名
+    :return: 返回图像文件夹路径以及标签文件夹路径
     """
-    dst_img_dir = os.path.join(dst_dir, dst_image_folder)
-    dst_label_dir = os.path.join(dst_dir, dst_label_folder)
+    assert isinstance(dir, str) and isinstance(image_folder, str) and isinstance(label_folder, str)
 
-    if not os.path.exists(dst_dir):
-        os.mkdir(dst_dir)
-    if os.path.exists(dst_img_dir):
-        raise ValueError('{}已存在'.format(dst_img_dir))
-    if os.path.exists(dst_label_dir):
-        raise ValueError('{}已存在'.format(dst_label_dir))
-    os.mkdir(dst_img_dir)
-    os.mkdir(dst_label_dir)
+    img_dir = os.path.join(dir, image_folder)
+    label_dir = os.path.join(dir, label_folder)
 
-    return dst_img_dir, dst_label_dir
+    if is_input:
+        if not os.path.exists(dir) or not os.path.exists(img_dir) or not os.path.exists(label_dir):
+            raise ValueError(''.format(label_dir))
+    else:
+        if not os.path.exists(dir):
+            os.mkdir(dir)
+        if os.path.exists(img_dir):
+            raise ValueError('{}已存在'.format(img_dir))
+        if os.path.exists(label_dir):
+            raise ValueError('{}已存在'.format(label_dir))
+        os.mkdir(img_dir)
+        os.mkdir(label_dir)
+
+    return img_dir, label_dir
+
+
+def parse_classmap(classmap: dict, objects: dict):
+    """
+    解析类名，添加对应的数字
+    """
+    assert isinstance(classmap, dict) and isinstance(objects, dict)
+
+    for obj in objects:
+        name = obj['name']
+
+        if name not in classmap.keys():
+            classmap[name] = len(classmap.keys())

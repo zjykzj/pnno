@@ -30,7 +30,7 @@ def json_to_xml(json_str, file_name=None):
     return xml_str
 
 
-def xyxy_2_xywh(self, bndbox, size):
+def xyxy_2_xywh(bndbox, size):
     """
     创建yolov5
     :param bndbox: [xmin, ymin, xmax, ymax]
