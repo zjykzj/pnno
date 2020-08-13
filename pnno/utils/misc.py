@@ -100,11 +100,11 @@ def check_input_output_folder(dir: str, image_folder: str, label_folder: str, is
     return img_dir, label_dir
 
 
-def parse_classmap(classmap: dict, objects: dict):
+def parse_classmap(classmap: dict, objects: list):
     """
     解析类名，添加对应的数字
     """
-    assert isinstance(classmap, dict) and isinstance(objects, dict)
+    assert isinstance(classmap, dict) and isinstance(objects, list)
 
     for obj in objects:
         name = obj['name']

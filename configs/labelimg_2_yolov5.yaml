@@ -1,11 +1,15 @@
 ANNO:
   PARSER: 'labelimg'
   CREATOR: 'yolov5'
+INPUT:
+  DIR: 'tests/labelimg_2_yolov5/'
+  IMAGE_FOLDER: 'data-labelimg'
+  LABEL_FOLDER: 'data-labelimg'
+OUTPUT:
+  DIR: 'tests/labelimg_2_yolov5/data-yolov5/'
 LABELIMG:
-  SRC_DIR: 'tests/labelimg_2_yolov5/data-labelimg/'
   IMG_EXTENSION: '.png'
   ANNO_EXTENSION: '.xml'
 YOLOV5:
-  DST_DIR: 'tests/labelimg_2_yolov5/data-yolov5/'
   IMG_EXTENSION: '.png'
   ANNO_EXTENSION: '.txt'
