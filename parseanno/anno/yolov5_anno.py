@@ -14,6 +14,7 @@ import cv2
 import numpy as np
 import json
 
+from parseanno.utils.utility import xyxy_2_xywh
 from parseanno.utils.misc import get_file_name, check_dst_folder
 from parseanno.anno import registry
 from parseanno.anno.base_anno import BaseAnno
@@ -59,28 +60,6 @@ class YoLoV5Anno(BaseAnno):
             self.dst_img_dir = dst_img_dir
             self.dst_label_dir = dst_label_dir
 
-    def xyxy_2_xywh(self, bndbox, size):
-        """
-        创建yolov5
-        :param bndbox: [xmin, ymin, xmax, ymax]
-        :param size: (width, height)
-        :return: [x_center, y_center, width, height]相对格式
-        """
-        xmin, ymin, xmax, ymax = bndbox
-        img_w, img_h = size[:2]
-
-        x_center = (xmin + xmax) / 2
-        y_center = (ymin + ymax) / 2
-        width = xmax - xmin
-        height = ymax - ymin
-
-        x_center = 1.0 * x_center / img_w
-        y_center = 1.0 * y_center / img_h
-        width = 1.0 * width / img_w
-        height = 1.0 * height / img_h
-
-        return [x_center, y_center, width, height]
-
     def process(self) -> dict:
         pass
 
@@ -108,7 +87,7 @@ class YoLoV5Anno(BaseAnno):
                 name = obj['name']
                 bndbox = obj['bndbox']
 
-                x_center, y_center, box_w, box_h = self.xyxy_2_xywh(bndbox, size)
+                x_center, y_center, box_w, box_h = xyxy_2_xywh(bndbox, size)
                 label_list.append([classmap[name], x_center, y_center, box_w, box_h])
             # 保存
             img = cv2.imread(img_path)
