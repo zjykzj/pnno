@@ -18,7 +18,7 @@ def main():
     args = parser.parse_args()
 
     if args.version:
-        print('ParseAnno: v{}'.format(get_version()))
+        print('pnno: v{}'.format(get_version()))
         sys.exit(0)
 
     if not args.config_file:
