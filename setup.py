@@ -33,7 +33,7 @@ CLASSIFIERS = [
 # ---------------------- #
 
 def get_version():
-    init_py_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "parseanno", "__init__.py")
+    init_py_path = os.path.join(os.path.abspath(os.path.dirname(__file__)), "pnno", "__init__.py")
     init_py = open(init_py_path, "r").readlines()
     version_line = [l.strip() for l in init_py if l.startswith("__version__")][0]
     version = version_line.split("=")[-1].strip().strip("'\"")
@@ -96,10 +96,10 @@ setuptools.setup(
     classifiers=CLASSIFIERS,
     python_requires=PYTHON_REQUIRES,
     install_requires=INSTALL_REQUIRES,
-    # scripts=['parseanno/tools/cli.py']
+    # scripts=['pnno/tools/cli.py']
     entry_points={
         'console_scripts': [
-            'parse-anno=parseanno.tools.cli:main'
+            'parse-anno=pnno.tools.cli:main'
         ]
     },
     cmdclass={
