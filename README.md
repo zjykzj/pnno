@@ -1,6 +1,6 @@
-# ParseAnno
+# pnno
 
-[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![](https://img.shields.io/badge/PYPI-ParseAnno-brightgreen)](https://pypi.org/project/ParseAnno/)
+[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 > 数据格式转换工具实现
 
@@ -11,7 +11,7 @@
 
 ## 内容列表
 
-- [ParseAnno](#parseanno)
+- [pnno](#pnno)
   - [内容列表](#内容列表)
   - [背景](#背景)
   - [主要维护人员](#主要维护人员)
@@ -24,11 +24,11 @@
 
 ## 主要维护人员
 
-* zhujian - *Initial work* - [zjZSTU](https://github.com/zjZSTU)
+* zhujian - *Initial work* - [zjykzj](https://github.com/zjykzj)
 
 ## 参与贡献方式
 
-欢迎任何人的参与！打开[issue](https://github.com/zjZSTU/ParseAnno/issues)或提交合并请求。
+欢迎任何人的参与！打开[issue](https://github.com/zjykzj/pnno/issues)或提交合并请求。
 
 注意:
 
@@ -38,4 +38,4 @@
 
 ## 许可证
 
-[Apache License 2.0](LICENSE) © 2020 zjZSTU
+[Apache License 2.0](LICENSE) © 2020 zjykzj
