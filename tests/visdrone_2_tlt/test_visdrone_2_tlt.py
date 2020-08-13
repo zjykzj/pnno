@@ -7,8 +7,8 @@
 @description: 
 """
 
-from parseanno.config import cfg
-from parseanno.engine import AnnoProcessor
+from pnno.config import cfg
+from pnno.engine import AnnoProcessor
 
 
 class TestVisdrone2Tlt():

@@ -1,11 +1,15 @@
 ANNO:
   PARSER: 'visdrone'
   CREATOR: 'tlt'
+INPUT:
+  DIR: 'tests/visdrone_2_tlt/data-virdrone/'
+  IMAGE_FOLDER: 'images'
+  LABEL_FOLDER: 'annotations'
+OUTPUT:
+  DIR: 'tests/visdrone_2_tlt/data-tlt/'
 VISDRONE:
-  SRC_DIR: 'tests/visdrone_2_tlt/data-virdrone/'
   IMG_EXTENSION: '.jpg'
   ANNO_EXTENSION: '.txt'
 TLT:
-  DST_DIR: 'tests/visdrone_2_tlt/data-tlt/'
   IMG_EXTENSION: '.jpg'
   ANNO_EXTENSION: '.txt'
