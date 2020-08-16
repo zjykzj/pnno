@@ -15,7 +15,7 @@ import numpy as np
 import json
 
 from pnno.util.utility import xyxy_2_xywh
-from pnno.util.misc import get_file_name, check_input_output_folder
+from pnno.util.misc import get_img_name, check_input_output_folder
 from pnno.anno import registry
 from pnno.anno.base_anno import BaseAnno
 from pnno.util.logger import setup_logger
@@ -80,7 +80,7 @@ class YoLoV5Anno(BaseAnno):
 
         classmap = input_data['classmap']
         for i, (img_path, anno_obj) in enumerate(input_data['anno_data'].items(), 1):
-            img_name = get_file_name(img_path)
+            img_name = get_img_name(img_path)
             if verbose:
                 logger.info('保存{}'.format(img_name))
 

@@ -14,8 +14,8 @@ import glob
 import numpy as np
 from collections import OrderedDict
 
-from pnno.util.utility import json_to_xml
-from pnno.util.misc import check_image_label, get_file_name, parse_classmap, check_input_output_folder
+from pnno.util.utility import dict_to_xml
+from pnno.util.misc import check_image_label, get_img_name, parse_classmap, check_input_output_folder, parse_img_path
 from pnno.util.parse_voc_xml import ParseVocXml
 from pnno.anno import registry
 from pnno.anno.base_anno import BaseAnno
@@ -97,7 +97,7 @@ class LabelImgAnno(BaseAnno):
 
         classmap = input_data['classmap']
         for i, (img_path, anno_obj) in enumerate(input_data['anno_data'].items(), 1):
-            img_name = get_file_name(img_path)
+            img_name = get_img_name(img_path)
             if verbose:
                 logger.info('保存{}'.format(img_name))
 
@@ -106,9 +106,11 @@ class LabelImgAnno(BaseAnno):
             annotation_dict = OrderedDict()
             root_dict['annotation'] = annotation_dict
 
-            annotation_dict['folder'] = ''
-            annotation_dict['filename'] = img_name
-            annotation_dict['path'] = img_path
+            abs_img_path = os.path.abspath(img_path)
+            folder, filename = parse_img_path(abs_img_path)[:2]
+            annotation_dict['folder'] = folder
+            annotation_dict['filename'] = filename
+            annotation_dict['path'] = abs_img_path
             annotation_dict['source'] = OrderedDict({'database': 'Unknown'})
 
             size = anno_obj['size']
@@ -153,7 +155,7 @@ class LabelImgAnno(BaseAnno):
             cv2.imwrite(dst_img_path, img)
 
             dst_label_path = os.path.join(dst_label_dir, img_name + anno_extension)
-            json_to_xml(root_dict, dst_label_path)
+            dict_to_xml(root_dict, dst_label_path)
 
         if verbose:
             logger.info('保存classmap.json')

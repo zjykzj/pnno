@@ -25,11 +25,27 @@ def is_dir(src_dir):
         raise ValueError('{}不是目录'.format(src_dir))
 
 
-def get_file_name(file_path):
+def get_img_name(img_path):
     """
-    解析文件名
+    解析图像名。比如/path/to/lena.jpg得到lena
     """
-    return os.path.splitext(os.path.split(file_path)[1])[0]
+    return os.path.splitext(os.path.split(img_path)[1])[0]
+
+
+def parse_img_path(img_path):
+    """
+    解析图像路径，得到图像所在文件夹，文件名，图像名和图像后缀
+    比如/path/to/input_data/lena.jpg，则返回
+    ['input_data', 'lena.jpg', 'lena', '.jpg']
+    """
+    base_name = os.path.basename(img_path)
+    dir_name = os.path.dirname(img_path)
+
+    folder = os.path.basename(dir_name)
+    file_name = base_name
+    img_name, img_extension = os.path.splitext(base_name)
+
+    return [folder, file_name, img_name, img_extension]
 
 
 def get_classmap(anno_data, classmap):
@@ -56,8 +72,8 @@ def check_image_label(img_path_list, anno_path_list):
         '图像文件数：{} - 标注文件数：{}'.format(len(img_path_list), len(anno_path_list))
 
     for img_path, anno_path in zip(img_path_list, anno_path_list):
-        img_name = get_file_name(img_path)
-        anno_name = get_file_name(anno_path)
+        img_name = get_img_name(img_path)
+        anno_name = get_img_name(anno_path)
 
         if img_name != anno_name:
             raise ValueError('{}和{}不对应'.format(img_path, anno_path))
@@ -88,7 +104,6 @@ def check_input_output_folder(dir: str, image_folder: str, label_folder: str, is
         if not os.path.exists(dir) or not os.path.exists(img_dir) or not os.path.exists(label_dir):
             raise ValueError('请检查输入数据是否正确')
     else:
-
 
         if not os.path.exists(dir):
             os.mkdir(dir)
