@@ -63,7 +63,7 @@ def check_image_label(img_path_list, anno_path_list):
             raise ValueError('{}和{}不对应'.format(img_path, anno_path))
 
 
-def check_input_output_folder(dir: str, image_folder: str, label_folder: str, is_input: bool):
+def check_input_output_folder(dir: str, image_folder: str, label_folder: str, is_input=True):
     """
     检查根目录以及图像和标签文件夹
     检查输入目录
