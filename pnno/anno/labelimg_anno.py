@@ -14,13 +14,13 @@ import glob
 import numpy as np
 from collections import OrderedDict
 
-from pnno.utils.utility import json_to_xml
-from pnno.utils.misc import check_image_label, get_file_name, parse_classmap, check_input_output_folder
-from pnno.utils.parse_voc_xml import ParseVocXml
+from pnno.util.utility import json_to_xml
+from pnno.util.misc import check_image_label, get_file_name, parse_classmap, check_input_output_folder
+from pnno.util.parse_voc_xml import ParseVocXml
 from pnno.anno import registry
 from pnno.anno.base_anno import BaseAnno
 
-from pnno.utils.logger import setup_logger
+from pnno.util.logger import setup_logger
 
 
 @registry.ANNOS.register('labelimg')

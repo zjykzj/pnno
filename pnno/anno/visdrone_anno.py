@@ -14,8 +14,8 @@ import cv2
 
 from pnno.anno import registry
 from pnno.anno.base_anno import BaseAnno
-from pnno.utils.misc import check_image_label, check_input_output_folder
-from pnno.utils.logger import setup_logger
+from pnno.util.misc import check_image_label, check_input_output_folder
+from pnno.util.logger import setup_logger
 
 
 @registry.ANNOS.register('visdrone')

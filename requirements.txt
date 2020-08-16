@@ -4,13 +4,13 @@
 # pnno/anno/tlt_anno.py: 12
 # pnno/anno/visdrone_anno.py: 12
 # pnno/anno/yolov5_anno.py: 14
-# tools/uav123.py: 14
+# tool/uav123.py: 14
 numpy == 1.17.2
 
 # pnno/anno/tlt_anno.py: 11
 # pnno/anno/visdrone_anno.py: 13
 # pnno/anno/yolov5_anno.py: 13
-# pnno/utils/utility.py: 10
+# pnno/util/utility.py: 10
 opencv_contrib_python == 4.2.0.32
 
 # setup.py: 10

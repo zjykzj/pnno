@@ -96,10 +96,10 @@ setuptools.setup(
     classifiers=CLASSIFIERS,
     python_requires=PYTHON_REQUIRES,
     install_requires=INSTALL_REQUIRES,
-    # scripts=['pnno/tools/cli.py']
+    # scripts=['pnno/tool/cli.py']
     entry_points={
         'console_scripts': [
-            'pnno=pnno.tools.cli:main'
+            'pnno=pnno.tool.cli:main'
         ]
     },
     cmdclass={

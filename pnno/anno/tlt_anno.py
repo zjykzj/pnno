@@ -13,10 +13,10 @@ import numpy as np
 import json
 
 from pnno.anno.base_anno import BaseAnno
-from pnno.utils.misc import get_file_name, check_input_output_folder
+from pnno.util.misc import get_file_name, check_input_output_folder
 from pnno.anno import registry
 
-from pnno.utils.logger import setup_logger
+from pnno.util.logger import setup_logger
 
 
 @registry.ANNOS.register('tlt')

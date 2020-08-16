@@ -11,7 +11,7 @@ import os
 import glob
 
 from pnno.anno import build_anno
-from pnno.utils.logger import setup_logger
+from pnno.util.logger import setup_logger
 
 
 class AnnoProcessor(object):

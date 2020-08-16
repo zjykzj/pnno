@@ -10,7 +10,7 @@
 import sys
 from pnno.config import cfg
 from pnno.engine import AnnoProcessor, default_argument_parser
-from pnno.utils.misc import get_version
+from pnno.util.misc import get_version
 
 
 def main():
