@@ -9,6 +9,8 @@
 
 from pnno.config import cfg
 from pnno.anno.labelimg_anno import LabelImgAnno
+from pnno.util.utility import xml_to_dict
+import shutil
 
 
 class TestLabelAnno(object):
@@ -22,7 +24,7 @@ class TestLabelAnno(object):
         output_data = labelImgAnno.process()
         print(output_data)
 
-        real_data = self.get_sample_data()
+        real_data = self.get_output_data()
 
         assert output_data == real_data
 
@@ -32,10 +34,17 @@ class TestLabelAnno(object):
         cfg.freeze()
 
         labelImgAnno = LabelImgAnno(cfg)
-        output_data = self.get_sample_data()
-        output_data = labelImgAnno.save(output_data)
+        output_data = self.get_output_data()
+        labelImgAnno.save(output_data)
 
-    def get_sample_data(self):
+        input_data = xml_to_dict('tests/labelimg_anno_test/input_data/lena.xml')
+        output_data = xml_to_dict('tests/labelimg_anno_test/output_data/labels/lena.xml')
+
+        assert input_data == output_data
+
+        shutil.rmtree('tests/labelimg_anno_test/output_data')
+
+    def get_output_data(self):
         """
         {'classmap': {'box': 0},
         'anno_data': {'tests/labelimg_anno_test/input_data/lena.jpg':
