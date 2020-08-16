@@ -88,14 +88,19 @@ def check_input_output_folder(dir: str, image_folder: str, label_folder: str, is
         if not os.path.exists(dir) or not os.path.exists(img_dir) or not os.path.exists(label_dir):
             raise ValueError('请检查输入数据是否正确')
     else:
+
+
         if not os.path.exists(dir):
             os.mkdir(dir)
+
         if os.path.exists(img_dir):
             raise ValueError('{}已存在'.format(img_dir))
-        if os.path.exists(label_dir):
-            raise ValueError('{}已存在'.format(label_dir))
         os.mkdir(img_dir)
-        os.mkdir(label_dir)
+
+        if img_dir != label_dir:
+            if os.path.exists(label_dir):
+                raise ValueError('{}已存在'.format(label_dir))
+            os.mkdir(label_dir)
 
     return img_dir, label_dir
 

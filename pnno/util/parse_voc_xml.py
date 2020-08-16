@@ -56,14 +56,15 @@ class ParseVocXml(object):
                 voc_dict[node.tag] = text
         return voc_dict
 
-    def get_width_height(self):
+    def get_size(self):
         """
         :return: 图像宽高
         """
         size = self.target['annotation']['size']
         width = int(size['width'])
         height = int(size['height'])
-        return (width, height)
+        depth = int(size['depth'])
+        return (width, height, depth)
 
     def get_objects(self, difficult=False):
         """

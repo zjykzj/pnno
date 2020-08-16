@@ -26,7 +26,8 @@ def json_to_xml(json_str, file_name=None):
     assert file_name is not None
     # xmltodict库的unparse()json转xml
     # 参数pretty 是格式化xml
-    xml_str = xmltodict.unparse(json_str, output=file_name, pretty=1)
+    with open(file_name, 'w') as f:
+        xml_str = xmltodict.unparse(json_str, output=f, pretty=1)
     return xml_str
 
 

@@ -74,7 +74,7 @@ class LabelImgAnno(BaseAnno):
             parser = ParseVocXml(anno_path)
 
             anno_obj = dict()
-            anno_obj['size'] = parser.get_width_height()
+            anno_obj['size'] = parser.get_size()
             anno_obj['objects'] = parser.get_objects()
             anno_data[img_path] = anno_obj
 
@@ -106,17 +106,17 @@ class LabelImgAnno(BaseAnno):
             annotation_dict = OrderedDict()
             root_dict['annotation'] = annotation_dict
 
-            annotation_dict['folder'] = 'image'
+            annotation_dict['folder'] = ''
             annotation_dict['filename'] = img_name
             annotation_dict['path'] = img_path
             annotation_dict['source'] = OrderedDict({'database': 'Unknown'})
 
             size = anno_obj['size']
-            if len(size.shape) == 2:
-                h, w = size.shape[:2]
+            if len(size) == 2:
+                h, w = size[:2]
                 d = 1
             else:
-                h, w, d = size.shape[:3]
+                h, w, d = size[:3]
             size_dict = OrderedDict()
             size_dict['width'] = w
             size_dict['height'] = h
@@ -125,6 +125,7 @@ class LabelImgAnno(BaseAnno):
 
             annotation_dict['segmented'] = 0
 
+            object_list = list()
             objects = anno_obj['objects']
             for obj in objects:
                 name = obj['name']
@@ -143,14 +144,16 @@ class LabelImgAnno(BaseAnno):
                 bndbox_dict['xmax'] = xmax
                 bndbox_dict['ymax'] = ymax
                 object_dict['bndbox'] = bndbox_dict
+
+                object_list.append(object_dict)
+            annotation_dict['object'] = object_list
             # 保存
             img = cv2.imread(img_path)
             dst_img_path = os.path.join(dst_image_dir, img_name + img_extension)
             cv2.imwrite(dst_img_path, img)
 
             dst_label_path = os.path.join(dst_label_dir, img_name + anno_extension)
-            annotation_json = json.dumps(annotation_dict, indent=1)
-            json_to_xml(annotation_json, dst_label_path)
+            json_to_xml(root_dict, dst_label_path)
 
         if verbose:
             logger.info('保存classmap.json')
