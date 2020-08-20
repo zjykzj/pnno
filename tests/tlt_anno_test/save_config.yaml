@@ -1,0 +1,14 @@
+ANNO:
+  PARSER: 'labelimg'
+  CREATOR: 'tlt'
+INPUT:
+  DIR: 'tests/tlt_anno_test/input_data/'
+  IMAGE_FOLDER: ''
+  LABEL_FOLDER: ''
+OUTPUT:
+  DIR: 'tests/tlt_anno_test/output_data'
+  IMAGE_FOLDER: 'images'
+  LABEL_FOLDER: 'labels'
+LABELIMG:
+  IMG_EXTENSION: '.jpg'
+  ANNO_EXTENSION: '.txt'
