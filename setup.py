@@ -22,6 +22,7 @@ URL = "https://github.com/zjykzj/pnno"
 PYTHON_REQUIRES = ">=3.6"
 INSTALL_REQUIRES = [
     "yacs >= 0.1.7",
+    "opencv_python >= 4.2.0",
     "opencv_contrib_python >= 4.2.0",
     "numpy >= 1.17.2"
 ]
@@ -30,6 +31,8 @@ CLASSIFIERS = [
     "Operating System :: OS Independent",
     "License :: OSI Approved :: Apache Software License"
 ]
+
+
 # ---------------------- #
 
 def get_version():
@@ -99,7 +102,8 @@ setuptools.setup(
     # scripts=['pnno/tool/cli.py']
     entry_points={
         'console_scripts': [
-            'pnno=pnno.tool.cli:main'
+            'pnno=pnno.tool.cli:main',
+            'simg=pnno.tool.show:show_image'
         ]
     },
     cmdclass={
