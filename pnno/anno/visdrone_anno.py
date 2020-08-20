@@ -75,8 +75,12 @@ class VisDroneAnno(BaseAnno):
         anno_obj = dict()
 
         img = cv2.imread(img_path)
-        h, w = img.shape[:2]
-        anno_obj['size'] = (w, h)
+        if len(img.shape) == 3:
+            h, w, d = img.shape[:3]
+            anno_obj['size'] = (w, h, d)
+        else:
+            h, w = img.shape[:2]
+            anno_obj['size'] = (w, h, 1)
 
         anno_array = np.loadtxt(anno_path, dtype=np.str, delimiter=',')
         objects = list()
