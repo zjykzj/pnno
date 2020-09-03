@@ -5,7 +5,7 @@
   <!-- <a title="俄语" href="../ru/README.md">🇷🇺</a> -->
 </div>
 
- <div align="center"><a title="" href="https://github.com/zjykzj/pnno"><img align="center" src="./imgs/pnno.png"></a></div>
+ <div align="center"><a title="" href="https://github.com/zjykzj/pnno"><img align="center" src="./imgs/PNNO.png"></a></div>
 
 <p align="center">
   «pnno» 实现了不同格式标注数据的自动转换
