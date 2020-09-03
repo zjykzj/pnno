@@ -1,10 +1,21 @@
-# pnno
+<div align="right">
+  语言:
+    🇨🇳
+  <a title="英语" href="./README.en.md">🇺🇸</a>
+  <!-- <a title="俄语" href="../ru/README.md">🇷🇺</a> -->
+</div>
 
-![](./imgs/pnno.png)
+ <div align="center"><a title="" href="https://github.com/zjykzj/pnno"><img align="center" src="./imgs/pnno.png"></a></div>
 
-[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme) [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![](https://img.shields.io/badge/PYPI-PNNO-brightgreen)](https://pypi.org/project/pnno/)
-
-> 数据格式转换工具实现
+<p align="center">
+  «pnno» 实现了不同格式标注数据的自动转换
+<br>
+<br>
+  <a href="https://github.com/RichardLitt/standard-readme"><img src="https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square"></a>
+  <a href="https://conventionalcommits.org"><img src="https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg"></a>
+  <a href="http://commitizen.github.io/cz-cli/"><img src="https://img.shields.io/badge/commitizen-friendly-brightgreen.svg"></a>
+  <a href="https://pypi.org/project/pnno/"><img src="https://img.shields.io/badge/PYPI-PNNO-brightgreen"></a>
+</p>
 
 将不同数据集转换成算法指定格式。当前已实现
 
@@ -13,12 +24,11 @@
 
 ## 内容列表
 
-- [pnno](#pnno)
-  - [内容列表](#内容列表)
-  - [背景](#背景)
-  - [主要维护人员](#主要维护人员)
-  - [参与贡献方式](#参与贡献方式)
-  - [许可证](#许可证)
+- [内容列表](#内容列表)
+- [背景](#背景)
+- [主要维护人员](#主要维护人员)
+- [参与贡献方式](#参与贡献方式)
+- [许可证](#许可证)
 
 ## 背景
 
