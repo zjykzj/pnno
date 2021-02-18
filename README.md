@@ -1,7 +1,7 @@
 <div align="right">
   Language:
     🇺🇸
-  <a title="Chinese" href="./README.ch-CN.md">🇨🇳</a>
+  <a title="Chinese" href="./README.zh-CN.md">🇨🇳</a>
 </div>
 
  <div align="center"><a title="" href="https://github.com/zjykzj/pnno"><img align="center" src="./imgs/PNNO.png"></a></div>

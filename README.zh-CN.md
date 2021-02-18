@@ -1,8 +1,7 @@
 <div align="right">
   语言:
     🇨🇳
-  <a title="英语" href="./README.en.md">🇺🇸</a>
-  <!-- <a title="俄语" href="../ru/README.md">🇷🇺</a> -->
+  <a title="英语" href="./README.md">🇺🇸</a>
 </div>
 
  <div align="center"><a title="" href="https://github.com/zjykzj/pnno"><img align="center" src="./imgs/PNNO.png"></a></div>
