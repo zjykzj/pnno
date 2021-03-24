@@ -21,6 +21,8 @@
 1. `LabelImg`标注 `-> YoloV5`数据格式
 2. `VisDrone`数据集 `-> TLT Kitti`数据格式
 
+相关阅读：[[pnno]转换json/dict数据为voc-xml](https://visionguide.readthedocs.io/zh_CN/latest/python/tool/pnno/)
+
 ## 内容列表
 
 - [内容列表](#内容列表)
