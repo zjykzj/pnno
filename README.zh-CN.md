@@ -7,7 +7,7 @@
  <div align="center"><a title="" href="https://github.com/zjykzj/pnno"><img align="center" src="./imgs/PNNO.png"></a></div>
 
 <p align="center">
-  «pnno» 实现了不同格式标注数据的自动转换
+  «pnno» 实现了不同格式的数据集或者标注文件的转换
 <br>
 <br>
   <a href="https://github.com/RichardLitt/standard-readme"><img src="https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square"></a>

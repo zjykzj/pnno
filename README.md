@@ -7,7 +7,7 @@
  <div align="center"><a title="" href="https://github.com/zjykzj/pnno"><img align="center" src="./imgs/PNNO.png"></a></div>
 
 <p align="center">
-  «pnno» realizes the automatic conversion of annotation data in different formats
+  «pnno» realizes the conversion of dataset or annotation data in different formats
 <br>
 <br>
   <a href="https://github.com/RichardLitt/standard-readme"><img src="https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square"></a>
