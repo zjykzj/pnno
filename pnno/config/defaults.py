@@ -3,11 +3,11 @@ from yacs.config import CfgNode as CN
 _C = CN()
 
 _C.ANNO = CN()
-# 原始标注
+# Original annotation
 _C.ANNO.PARSER = ''
-# 结果标注
+# Result annotation
 _C.ANNO.CREATOR = ''
-# 详细输出
+# Detailed output or not
 _C.ANNO.VERBOSE = True
 
 # ---------------------------------------------------------------------------- #
@@ -15,23 +15,23 @@ _C.ANNO.VERBOSE = True
 # ---------------------------------------------------------------------------- #
 
 _C.INPUT = CN()
-# 输入的图像数据路径
+# Input image data path
 _C.INPUT.IMAGE_FOLDER = 'images'
-# 输入的标签数据路径
+# Label data path entered
 _C.INPUT.LABEL_FOLDER = 'labels'
-# 根目录 - 作为解析器
+# Root directory - as parser
 _C.INPUT.DIR = ''
 
 # ---------------------------------------------------------------------------- #
 # output
 # ---------------------------------------------------------------------------- #
 
-# 处理后的图像文件名
 _C.OUTPUT = CN()
+# Processed image data path
 _C.OUTPUT.IMAGE_FOLDER = 'images'
-# 处理后的标签文件名
+# Processed label data path
 _C.OUTPUT.LABEL_FOLDER = 'labels'
-# 根目录 - 作为保存器
+# Root directory - as a saver
 _C.OUTPUT.DIR = ''
 
 # ---------------------------------------------------------------------------- #
@@ -40,9 +40,9 @@ _C.OUTPUT.DIR = ''
 
 _C.LABELIMG = CN()
 _C.LABELIMG.NAME = 'labelimg'
-# 图像后缀名
+# Image suffix
 _C.LABELIMG.IMG_EXTENSION = '.png'
-# 标注文件后缀名
+# Label file suffix
 _C.LABELIMG.ANNO_EXTENSION = '.xml'
 
 # ---------------------------------------------------------------------------- #

@@ -23,11 +23,12 @@ from pnno.util.logger import setup_logger
 class TltAnno(BaseAnno):
     """
     [Nvidia TLT](https://docs.nvidia.com/metropolis/TLT/tlt-getting-started-guide/index.html)训练需要Kitti格式
-    参考：
+    refer to:
     [Object Detection Data Extension](https://github.com/NVIDIA/DIGITS/blob/v4.0.0-rc.3/digits/extensions/data/objectDetection/README.md)
     [Object Detection: About KITTI format #992](https://github.com/NVIDIA/DIGITS/issues/992)
-    每行表示一个标注对象，共15个字段（空格隔开），第一个字段表示类名，第5-9表示xmin/ymin/xmax/ymax（浮点表示），其余设为0即可
-    整体保存架构
+    Each line represents a annotation object, with 15 fields (separated by spaces). The first field represents the class name,
+    the fifth to ninth represents xmin/Ymin/xmax/ymax (floating-point representation), and the rest is set to 0.
+    Overall preservation architecture as follows:
     root/
         images/
             1.png
@@ -77,7 +78,7 @@ class TltAnno(BaseAnno):
         for i, (img_path, anno_obj) in enumerate(input_data['anno_data'].items(), 1):
             img_name = get_img_name(img_path)
             if verbose:
-                logger.info('保存{}'.format(img_name))
+                logger.info('save {}'.format(img_name))
 
             size = anno_obj['size']
             objects = anno_obj['objects']
@@ -89,7 +90,7 @@ class TltAnno(BaseAnno):
 
                 xmin, ymin, xmax, ymax = bndbox
                 label_list.append([name, 0, 0, 0, xmin, ymin, xmax, ymax, 0, 0, 0, 0, 0, 0, 0])
-            # 保存
+            # save
             img = cv2.imread(img_path)
             dst_img_path = os.path.join(dst_image_dir, img_name + img_extension)
             cv2.imwrite(dst_img_path, img)
@@ -98,7 +99,7 @@ class TltAnno(BaseAnno):
             np.savetxt(dst_label_path, label_list, fmt='%s', delimiter=' ')
 
         if verbose:
-            logger.info('保存classmap.json')
+            logger.info('save classmap.json')
         classmap_path = os.path.join(dst_dir, 'classmap.json')
         with open(classmap_path, 'w') as f:
             json.dump(classmap, f)

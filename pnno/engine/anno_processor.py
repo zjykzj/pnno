@@ -7,16 +7,13 @@
 @description: 
 """
 
-import os
-import glob
-
 from pnno.anno import build_anno
 from pnno.util.logger import setup_logger
 
 
 class AnnoProcessor(object):
     """
-    对标注数据进行处理，创建指定格式的训练数据
+    The labeled data is processed to create training data with specified format
     """
 
     def __init__(self, cfg):
@@ -31,10 +28,10 @@ class AnnoProcessor(object):
         logger = self.logger
 
         if verbose:
-            logger.info('处理原始标注数据')
+            logger.info('Processing original annotation data')
         output_data = self.parser.process()
         if verbose:
-            logger.info('保存指定格式数据')
+            logger.info('Save data in specified format')
         self.creator.save(output_data)
         if verbose:
-            logger.info('完成')
+            logger.info('Finish!!!')

@@ -21,16 +21,16 @@ from pnno.util.logger import setup_logger
 @registry.ANNOS.register('visdrone')
 class VisDroneAnno(BaseAnno):
     """
-    [VisDrone](http://aiskyeye.com/)数据集用于无人机的目标检测训练
-    下载地址：[VisDrone/VisDrone-Dataset](https://github.com/VisDrone/VisDrone-Dataset)
-    数据存放格式：
+    [VisDrone](http://aiskyeye.com/) data set for UAV target detection training
+    Download address: [VisDrone/VisDrone-Dataset](https://github.com/VisDrone/VisDrone-Dataset)
+    Data storage format:
     root/
         images/
         annotations/
-    标注文件（.txt）和图像一一对应，每行表示一个标注对象，共8个字段
-    参考[Object Detection in Images](http://aiskyeye.com/evaluate/results-format/). 其格式如下
+    The annotation file (. Txt) corresponds to the image one by one, and each line represents a annotation object, with a total of 8 fields
+    refer to [Object Detection in Images](http://aiskyeye.com/evaluate/results-format/). The format is as follows
     <bbox_left>,<bbox_top>,<bbox_width>,<bbox_height>,<score>,<object_category>,<truncation>,<occlusion>
-    在类别中忽略ignored-regions/others
+    Ignore in category ignored-regions/others
     """
 
     classmap = {'ignored-regions': 0, 'pedestrian': 1, 'people': 2, 'bicycle': 3, 'car': 4, 'van': 5, 'truck': 6,
@@ -58,7 +58,7 @@ class VisDroneAnno(BaseAnno):
         return [k for k, v in self.classmap.items() if v == value][0]
 
     def create_anno(self, anno_line) -> dict:
-        # 忽略ignored-regions/others
+        # ignore ignored-regions/others
         xmin, ymin, width, height, _, cate = anno_line[:6].astype(np.int)
         xmax = xmin + width
         ymax = ymin + height
@@ -69,7 +69,7 @@ class VisDroneAnno(BaseAnno):
 
     def parse_anno(self, img_path, anno_path) -> dict:
         """
-        解析visdrone图像和标注文件
+        Parse vistrone image and annotation file
         :returns: anno_obj
         """
         anno_obj = dict()
@@ -85,7 +85,7 @@ class VisDroneAnno(BaseAnno):
         anno_array = np.loadtxt(anno_path, dtype=np.str, delimiter=',')
         objects = list()
         if len(anno_array.shape) == 1:
-            # 就一个标注对象
+            # Just one annotation object
             obj = self.create_anno(anno_array)
             if obj:
                 objects.append(obj)
@@ -117,13 +117,13 @@ class VisDroneAnno(BaseAnno):
         anno_data = dict()
         for i, (img_path, anno_path) in enumerate(zip(img_path_list, anno_path_list), 1):
             if verbose:
-                logger.info('解析{}'.format(anno_path))
+                logger.info('parse {}'.format(anno_path))
 
             anno_obj = self.parse_anno(img_path, anno_path)
             if anno_obj:
                 anno_data[img_path] = anno_obj
             else:
-                self.logger.info('{}中仅包含标注类型为ignored-regions或者others的目标'.format(img_path))
+                self.logger.info('{} is a annotation object that only contains targets whose annotation type is ignored regions or others'.format(img_path))
 
         return {'classmap': self.classmap, 'anno_data': anno_data}
 

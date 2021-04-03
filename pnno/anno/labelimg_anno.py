@@ -11,7 +11,6 @@ import os
 import cv2
 import json
 import glob
-import numpy as np
 from collections import OrderedDict
 
 from pnno.util.utility import dict_to_xml
@@ -26,11 +25,11 @@ from pnno.util.logger import setup_logger
 @registry.ANNOS.register('labelimg')
 class LabelImgAnno(BaseAnno):
     """
-    使用LabelImg标注的数据集。默认情况下：
-    1. 图像为png格式
-    2. 标注文件为PASCAL VOC格式的xml文件
-    3. 其图像和标注文件放置于同一目录下。比如1.txt/1.xml/2.txt/2.xml/...
-    关于LabelImg，参考：[tzutalin/labelImg](https://github.com/tzutalin/labelImg)
+    Dataset annotated with LabelImg. By default:
+    1. The image is in PNG format
+    2. The annotation file is an XML file in Pascal VOC format
+    3. The image and annotation file are placed in the same directory. For example 1.txt/1.xml/2.txt/2.xml/...
+    As LabelImg, refer to [tzutalin/labelImg](https://github.com/tzutalin/labelImg)
     """
 
     def __init__(self, cfg):
@@ -70,7 +69,7 @@ class LabelImgAnno(BaseAnno):
         anno_data = dict()
         for i, (img_path, anno_path) in enumerate(zip(img_path_list, anno_path_list), 1):
             if verbose:
-                logger.info('解析{}'.format(anno_path))
+                logger.info('parse {}'.format(anno_path))
             parser = ParseVocXml(anno_path)
 
             anno_obj = dict()
@@ -99,10 +98,10 @@ class LabelImgAnno(BaseAnno):
         for i, (img_path, anno_obj) in enumerate(input_data['anno_data'].items(), 1):
             img_name = get_img_name(img_path)
             if verbose:
-                logger.info('保存{}'.format(img_name))
+                logger.info('save {}'.format(img_name))
 
             root_dict = OrderedDict()
-            # 根节点
+            # Root node
             annotation_dict = OrderedDict()
             root_dict['annotation'] = annotation_dict
 
@@ -149,7 +148,7 @@ class LabelImgAnno(BaseAnno):
 
                 object_list.append(object_dict)
             annotation_dict['object'] = object_list
-            # 保存
+            # save
             img = cv2.imread(img_path)
             dst_img_path = os.path.join(dst_image_dir, img_name + img_extension)
             cv2.imwrite(dst_img_path, img)
@@ -158,7 +157,7 @@ class LabelImgAnno(BaseAnno):
             dict_to_xml(root_dict, dst_label_path)
 
         if verbose:
-            logger.info('保存classmap.json')
+            logger.info('save classmap.json')
         classmap_path = os.path.join(dst_dir, 'classmap.json')
         with open(classmap_path, 'w') as f:
             json.dump(classmap, f)

@@ -8,8 +8,6 @@
 """
 
 import os
-import copy
-import shutil
 import cv2
 import numpy as np
 import json
@@ -24,8 +22,8 @@ from pnno.util.logger import setup_logger
 @registry.ANNOS.register('yolov5')
 class YoLoV5Anno(BaseAnno):
     """
-    创建[ultralytics/yolov5](https://github.com/ultralytics/yolov5)训练所需数据集
-    其图像和标注文件排列如下：
+    Create [ultralytics/yolov5](https://github.com/ultralytics/yolov5) training data set
+    The image and annotation files are arranged as follows:
     ├── yolov5-dataset
         ── images
             ├── 201.png
@@ -33,14 +31,14 @@ class YoLoV5Anno(BaseAnno):
         ── labels
             ├── 201.txt
             ├── 202.txt
-    标注文件格式如下：
+    The format of the annotation file is as follows:
     class_num x_center y_center width height
-    class_num表示类别，从0开始
-    x_center/y_center/width/height使用相对图像宽高的坐标
-    示例如下：
+    class_num is the category, starting from 0
+    x_center/y_center/width/height use coordinates relative to the width and height of the image
+    Examples are as follows:
     0 0.110547 0.051621 0.154554 0.023163
 
-    额外保存一个classmap.txt，保存class_num和对应类名
+    Save one extra classmap.txt , save class_num and the corresponding class name
     """
 
     def __init__(self, cfg):
@@ -82,7 +80,7 @@ class YoLoV5Anno(BaseAnno):
         for i, (img_path, anno_obj) in enumerate(input_data['anno_data'].items(), 1):
             img_name = get_img_name(img_path)
             if verbose:
-                logger.info('保存{}'.format(img_name))
+                logger.info('save {}'.format(img_name))
 
             size = anno_obj['size']
             objects = anno_obj['objects']
@@ -103,7 +101,7 @@ class YoLoV5Anno(BaseAnno):
             np.savetxt(dst_label_path, label_list, fmt='%d %.6f %.6f %.6f %.6f', delimiter=' ')
 
         if verbose:
-            logger.info('保存classmap.json')
+            logger.info('save classmap.json')
         classmap_path = os.path.join(dst_dir, 'classmap.json')
         with open(classmap_path, 'w') as f:
             json.dump(classmap, f)

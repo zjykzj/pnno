@@ -4,10 +4,9 @@
 @date: 2020/7/13 下午4:11
 @file: utility.py
 @author: zj
-@description: 常用操作
+@description: Common operations
 """
 
-import json
 import xmltodict
 
 
