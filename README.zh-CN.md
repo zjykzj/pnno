@@ -60,6 +60,8 @@ $ pnno -f <cfg_file>
 
 操作二：转换[ VisDrone/VisDrone-Dataset](https://github.com/VisDrone/VisDrone-Dataset)数据集到[KITTI](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=2d)标注格式。**具体配置文件可参考`configs/visdrone_2_tlt.yaml`**
 
+操作三：转换`PyTorch ImageFolder`数据集为`LMDB`格式。**参考`demo/imagefolder_lmdb`**
+
 更多的使用参考`demo/`
 
 ### 命令行图像显示

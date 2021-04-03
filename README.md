@@ -60,6 +60,8 @@ Operation 1: convert [ tzutalin/labelImg](https://github.com/tzutalin/labelImg) 
 
 Operation 1: convert [ VisDrone/VisDrone-Dataset](https://github.com/VisDrone/VisDrone-Dataset) dataset to [KITTI](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=2d) label format. **Refer to the configuration file `configs/visdrone_2_tlt.yaml`**
 
+Operation 3: convert PyTorch ImageFolder dataset to LMDB format. **Refer to `demo/imagefolder_lmdb`**
+
 For more usage, refert to `demo/`
 
 ### Show Image in Command Line
