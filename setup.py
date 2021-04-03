@@ -21,10 +21,10 @@ DESCRIPTION = "Script for annotation data processing"
 URL = "https://github.com/zjykzj/pnno"
 PYTHON_REQUIRES = ">=3.6"
 INSTALL_REQUIRES = [
-    "yacs >= 0.1.7",
-    "opencv_python >= 4.2.0",
-    "opencv_contrib_python >= 4.2.0",
-    "numpy >= 1.17.2"
+    "numpy >= 1.19.5",
+    "opencv_python >= 4.5.1.48",
+    "xmltodict >= 0.12.0",
+    "yacs >= 0.1.8"
 ]
 CLASSIFIERS = [
     "Programming Language :: Python :: 3",
