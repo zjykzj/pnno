@@ -51,7 +51,7 @@ Operation 1: convert [ tzutalin/labelImg](https://github.com/tzutalin/labelImg) 
 
 Operation 1: convert [ VisDrone/VisDrone-Dataset](https://github.com/VisDrone/VisDrone-Dataset) dataset to [KITTI](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=2d) label format. **Refer to the configuration file `configs/visdrone_2_tlt.yaml`**
 
-For more usage, refert to `tests/`
+For more usage, refert to `demo/`
 
 ## Maintainers
 
