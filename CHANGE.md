@@ -1,6 +1,15 @@
 
 # CHANGE
 
+## v0.3.3
+
+* New features
+  * Add imagefolder_lmdb demo
+* Bug fixes
+  * Fix pytorch imagefolder import
+  * Fix logger usage
+* Breaking changes.
+
 ## v0.3.2
 
 * New features
