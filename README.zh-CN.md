@@ -21,8 +21,6 @@
 1. `LabelImg`标注 `-> YoloV5`数据格式
 2. `VisDrone`数据集 `-> TLT Kitti`数据格式
 
-相关阅读：[[pnno]转换json/dict数据为voc-xml](https://visionguide.readthedocs.io/zh_CN/latest/python/tool/pnno/)
-
 ## 内容列表
 
 - [内容列表](#内容列表)
@@ -52,6 +50,8 @@ $ pnno -f <cfg_file>
 操作一：转换[ tzutalin/labelImg](https://github.com/tzutalin/labelImg)标注文件到[ ultralytics/yolov5](https://github.com/ultralytics/yolov5)指定数据集格式。**具体配置文件可参考`configs/labelimg_2_yolov5.yaml`**
 
 操作二：转换[ VisDrone/VisDrone-Dataset](https://github.com/VisDrone/VisDrone-Dataset)数据集到[KITTI](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=2d)标注格式。**具体配置文件可参考`configs/visdrone_2_tlt.yaml`**
+
+更多的使用参考`tests/`
 
 ## 主要维护人员
 
