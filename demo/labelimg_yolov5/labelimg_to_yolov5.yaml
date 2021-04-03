@@ -1,0 +1,12 @@
+ANNO:
+  PARSER: 'labelimg'
+  CREATOR: 'yolov5'
+INPUT:
+  DIR: 'input_data/'
+  IMAGE_FOLDER: ''
+  LABEL_FOLDER: ''
+OUTPUT:
+  DIR: 'output_data/'
+LABELIMG:
+  IMG_EXTENSION: '.jpg'
+  ANNO_EXTENSION: '.xml'
