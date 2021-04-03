@@ -16,10 +16,13 @@
   <a href="https://pypi.org/project/pnno/"><img src="https://img.shields.io/badge/PYPI-PNNO-brightgreen"></a>
 </p>
 
-将不同数据集转换成算法指定格式。当前已实现
+本仓库提供了如下脚本功能：
 
-1. `LabelImg`标注 `-> YoloV5`数据格式
-2. `VisDrone`数据集 `-> TLT Kitti`数据格式
+1. 将不同数据集转换成算法指定格式。当前已实现
+   1. `LabelImg`标注 `-> YoloV5`数据格式
+   2. `VisDrone`数据集 `-> TLT Kitti`数据格式
+2. 将`PyTorch ImageFolder`数据集转换为`LMDB`格式
+3. 在命令行显示图像
 
 ## 内容列表
 
@@ -27,6 +30,8 @@
 - [背景](#背景)
 - [安装](#安装)
 - [使用](#使用)
+  - [数据集/标签文件转换](#数据集标签文件转换)
+  - [命令行图像显示](#命令行图像显示)
 - [主要维护人员](#主要维护人员)
 - [参与贡献方式](#参与贡献方式)
 - [许可证](#许可证)
@@ -43,6 +48,10 @@ $ pip install pnno
 
 ## 使用
 
+### 数据集/标签文件转换
+
+基本操作：
+
 ```
 $ pnno -f <cfg_file>
 ```
@@ -52,6 +61,12 @@ $ pnno -f <cfg_file>
 操作二：转换[ VisDrone/VisDrone-Dataset](https://github.com/VisDrone/VisDrone-Dataset)数据集到[KITTI](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=2d)标注格式。**具体配置文件可参考`configs/visdrone_2_tlt.yaml`**
 
 更多的使用参考`demo/`
+
+### 命令行图像显示
+
+```
+$ simg -f <IMG_FILE>
+```
 
 ## 主要维护人员
 

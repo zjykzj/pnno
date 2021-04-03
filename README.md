@@ -16,10 +16,13 @@
   <a href="https://pypi.org/project/pnno/"><img src="https://img.shields.io/badge/PYPI-PNNO-brightgreen"></a>
 </p>
 
-Convert different data sets into the format specified by the algorithm. Currently implemented
+This repo provides several script tools for the following aspects:
 
-1. `LabelImg` annotation -> `YoloV5` data format
-2. `VisDrone` data set -> `TLT KITTI` data format
+1. convert different data sets into the format specified by the algorithm. Currently implemented
+   1. `LabelImg` annotation -> `YoloV5` data format
+   2. `VisDrone` data set -> `TLT KITTI` data format
+2. convert PyTorch ImageFolder dataset to LMDB format
+3. show image in command line
 
 ## Table of Contents
 
@@ -27,6 +30,8 @@ Convert different data sets into the format specified by the algorithm. Currentl
 - [Background](#background)
 - [Install](#install)
 - [Usage](#usage)
+  - [Dataset/Label Convert](#datasetlabel-convert)
+  - [Show Image in Command Line](#show-image-in-command-line)
 - [Maintainers](#maintainers)
 - [Contributing](#contributing)
 - [License](#license)
@@ -43,6 +48,10 @@ $ pip install pnno
 
 ## Usage
 
+### Dataset/Label Convert
+
+Basic operation as follows:
+
 ```
 $ pnno -f <cfg_file>
 ```
@@ -52,6 +61,12 @@ Operation 1: convert [ tzutalin/labelImg](https://github.com/tzutalin/labelImg) 
 Operation 1: convert [ VisDrone/VisDrone-Dataset](https://github.com/VisDrone/VisDrone-Dataset) dataset to [KITTI](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=2d) label format. **Refer to the configuration file `configs/visdrone_2_tlt.yaml`**
 
 For more usage, refert to `demo/`
+
+### Show Image in Command Line
+
+```
+$ simg -f <IMG_FILE>
+```
 
 ## Maintainers
 
