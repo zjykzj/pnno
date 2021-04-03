@@ -12,7 +12,7 @@ from .yolov5_anno import YoLoV5Anno
 from .labelimg_anno import LabelImgAnno
 from .visdrone_anno import VisDroneAnno
 from .tlt_anno import TltAnno
-from .pytorch_imagefolder import ImageFolder
+from .pytorch_imagefolder import PytorchImageFolder
 from .lmdb import LMDB
 
 
