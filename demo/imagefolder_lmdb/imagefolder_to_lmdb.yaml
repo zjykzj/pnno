@@ -1,0 +1,9 @@
+ANNO:
+  PARSER: 'imagefolder'
+  CREATOR: 'lmdb'
+INPUT:
+  DIR: 'demo/imagefolder_lmdb'
+  IMAGE_FOLDER: 'att_faces_png'
+OUTPUT:
+  DIR: 'demo/imagefolder_lmdb'
+  IMAGE_FOLDER: 'train'
