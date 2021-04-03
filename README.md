@@ -18,8 +18,8 @@
 
 Convert different data sets into the format specified by the algorithm. Currently implemented
 
-1. `LabelImg` annotation <-> `YoloV5` data format
-2. `VisDrone` data set <-> `TLT KITTI` data format
+1. `LabelImg` annotation -> `YoloV5` data format
+2. `VisDrone` data set -> `TLT KITTI` data format
 
 ## Table of Contents
 
@@ -50,8 +50,6 @@ $ pnno -f <cfg_file>
 Operation 1: convert [ tzutalin/labelImg](https://github.com/tzutalin/labelImg) label file to [ ultralytics/yolov5](https://github.com/ultralytics/yolov5)  specified dataset format. **Refer to the configuration file `configs/labelimg_2_yolov5.yaml`**
 
 Operation 1: convert [ VisDrone/VisDrone-Dataset](https://github.com/VisDrone/VisDrone-Dataset) dataset to [KITTI](http://www.cvlibs.net/datasets/kitti/eval_object.php?obj_benchmark=2d) label format. **Refer to the configuration file `configs/visdrone_2_tlt.yaml`**
-
-**Note: the above annotation format conversion supports reverse operation**
 
 ## Maintainers
 
