@@ -33,6 +33,7 @@ class LMDB(BaseAnno):
 
         if cfg.ANNO.CREATOR == self.name:
             self.dst_dir = cfg.OUTPUT.DIR
+            self.image_folder = cfg.OUTPUT.IMAGE_FOLDER
 
         self.verbose = cfg.ANNO.VERBOSE
 
@@ -46,17 +47,11 @@ class LMDB(BaseAnno):
         verbose = self.verbose
         logger = self.logger
 
-        train_dataloader = input_data['train']
-        train_lmdb_path = os.path.join(self.dst_dir, 'train.lmdb')
+        data_loader = input_data['data_loader']
+        lmdb_path = os.path.join(self.dst_dir, f'{self.image_folder}.lmdb')
         if verbose:
-            logger("Generate LMDB to %s" % train_lmdb_path)
-        self.folder2lmdb(train_lmdb_path, train_dataloader)
-
-        val_dataloader = input_data['val']
-        val_lmdb_path = os.path.join(self.dst_dir, 'val.lmdb')
-        if verbose:
-            logger("Generate LMDB to %s" % val_lmdb_path)
-        self.folder2lmdb(val_lmdb_path, val_dataloader)
+            logger("Generate LMDB to %s" % lmdb_path)
+        self.folder2lmdb(lmdb_path, data_loader)
 
         if self.verbose:
             logger.info(__name__ + ' done')
@@ -64,6 +59,7 @@ class LMDB(BaseAnno):
     def folder2lmdb(self, dpath, data_loader, write_frequency=5000):
         verbose = self.verbose
         logger = self.logger
+
         db = lmdb.open(dpath, subdir=False,
                        map_size=1099511627776 * 2, readonly=False,
                        meminit=False, map_async=True)
@@ -81,7 +77,7 @@ class LMDB(BaseAnno):
 
         # finish iterating through dataset
         txn.commit()
-        keys = [u'{}'.format(k).encode('ascii') for k in range(idx + 1)]
+        keys = [u'{}'.format(k).encode('ascii') for k in range(len(data_loader))]
         with db.begin(write=True) as txn:
             txn.put(b'__keys__', dumps_data(keys))
             txn.put(b'__len__', dumps_data(len(keys)))

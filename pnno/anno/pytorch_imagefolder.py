@@ -30,20 +30,17 @@ class PytorchImageFolder(BaseAnno):
 
         if cfg.ANNO.PARSER == self.name:
             self.src_dir = cfg.INPUT.DIR
+            self.image_folder = cfg.INPUT.IMAGE_FOLDER
 
         self.verbose = cfg.ANNO.VERBOSE
         self.logger = setup_logger(__name__)
 
     def process(self) -> dict:
-        train_path = os.path.join(self.src_dir, 'train')
-        train_dataset = ImageFolder(train_path, loader=raw_reader)
-        train_dataloader = DataLoader(train_dataset, num_workers=16)
+        image_path = os.path.join(self.src_dir, self.image_folder)
+        data_set = ImageFolder(image_path, loader=raw_reader)
+        data_loader = DataLoader(data_set, num_workers=16)
 
-        val_path = os.path.join(self.src_dir, 'val')
-        val_dataset = ImageFolder(val_path, loader=raw_reader)
-        val_dataloader = DataLoader(val_dataset, num_workers=16)
-
-        return {'train': train_dataloader, 'val': val_dataloader}
+        return {'dataloader': data_loader}
 
     def save(self, input_data: dict):
         super(PytorchImageFolder, self).save(input_data)
