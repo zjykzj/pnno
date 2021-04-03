@@ -10,6 +10,7 @@
 import os
 import lmdb
 import pickle
+from tqdm import tqdm
 
 from . import registry
 from .base_anno import BaseAnno
@@ -36,21 +37,20 @@ class LMDB(BaseAnno):
             self.image_folder = cfg.OUTPUT.IMAGE_FOLDER
 
         self.verbose = cfg.ANNO.VERBOSE
-
         self.logger = setup_logger(__name__)
 
     def process(self) -> dict:
         pass
 
     def save(self, input_data: dict):
-        super(LMDB, self).save(input_data)
         verbose = self.verbose
         logger = self.logger
 
-        data_loader = input_data['data_loader']
         lmdb_path = os.path.join(self.dst_dir, f'{self.image_folder}.lmdb')
         if verbose:
-            logger("Generate LMDB to %s" % lmdb_path)
+            logger.info(f"Generate LMDB to {lmdb_path}")
+
+        data_loader = input_data['dataloader']
         self.folder2lmdb(lmdb_path, data_loader)
 
         if self.verbose:
@@ -65,13 +65,14 @@ class LMDB(BaseAnno):
                        meminit=False, map_async=True)
 
         txn = db.begin(write=True)
-        for idx, data in enumerate(data_loader):
-            image, label = data[0]
-
+        idx = 0
+        for image, label in tqdm(data_loader):
             txn.put(u'{}'.format(idx).encode('ascii'), dumps_data((image, label)))
+
+            idx += 1
             if idx % write_frequency == 0:
-                if verbose:
-                    logger("[%d/%d]" % (idx, len(data_loader)))
+                # if verbose:
+                #     logger.info("[%d/%d]" % (idx, len(data_loader)))
                 txn.commit()
                 txn = db.begin(write=True)
 
@@ -83,6 +84,6 @@ class LMDB(BaseAnno):
             txn.put(b'__len__', dumps_data(len(keys)))
 
         if verbose:
-            logger("Flushing database ...")
+            logger.info("Flushing database ...")
         db.sync()
         db.close()
