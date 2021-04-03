@@ -38,7 +38,7 @@ class PytorchImageFolder(BaseAnno):
     def process(self) -> dict:
         image_path = os.path.join(self.src_dir, self.image_folder)
         data_set = ImageFolder(image_path, loader=raw_reader)
-        data_loader = DataLoader(data_set, num_workers=16)
+        data_loader = DataLoader(data_set, num_workers=0)
 
         return {'dataloader': data_loader}
 
