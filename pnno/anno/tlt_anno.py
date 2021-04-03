@@ -12,11 +12,10 @@ import cv2
 import numpy as np
 import json
 
-from pnno.anno.base_anno import BaseAnno
-from pnno.util.misc import get_img_name, check_input_output_folder
-from pnno.anno import registry
-
-from pnno.util.logger import setup_logger
+from . import registry
+from ..anno.base_anno import BaseAnno
+from ..util.misc import get_img_name, check_input_output_folder
+from ..util.logger import setup_logger
 
 
 @registry.ANNOS.register('tlt')

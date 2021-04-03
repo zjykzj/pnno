@@ -8,9 +8,9 @@
 """
 
 import sys
-from pnno.config import cfg
-from pnno.engine import AnnoProcessor, default_argument_parser
-from pnno.util.misc import get_version
+from ..config import cfg
+from ..engine import Processor, default_argument_parser
+from ..util.misc import get_version
 
 
 def main():
@@ -28,7 +28,7 @@ def main():
     cfg.merge_from_file(args.config_file)
     cfg.freeze()
 
-    processor = AnnoProcessor(cfg)
+    processor = Processor(cfg)
     processor.process()
 
 

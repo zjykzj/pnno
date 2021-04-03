@@ -11,7 +11,7 @@ import os
 import cv2
 import sys
 import argparse
-from pnno.util.misc import get_version
+from ..util.misc import get_version
 
 
 def show_image():

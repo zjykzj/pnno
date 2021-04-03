@@ -7,6 +7,6 @@
 @description: 
 """
 
-from pnno.util.registry import Registry
+from ..util.registry import Registry
 
 ANNOS = Registry()

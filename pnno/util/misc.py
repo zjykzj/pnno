@@ -7,14 +7,12 @@
 @description: 
 """
 
-import pnno
-import cv2
+from .. import __version__
 import os
-import glob
 
 
 def get_version():
-    return pnno.__version__
+    return __version__
 
 
 def is_dir(src_dir):

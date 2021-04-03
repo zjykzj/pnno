@@ -13,13 +13,12 @@ import json
 import glob
 from collections import OrderedDict
 
-from pnno.util.utility import dict_to_xml
-from pnno.util.misc import check_image_label, get_img_name, parse_classmap, check_input_output_folder, parse_img_path
-from pnno.util.parse_voc_xml import ParseVocXml
-from pnno.anno import registry
-from pnno.anno.base_anno import BaseAnno
-
-from pnno.util.logger import setup_logger
+from ..anno import registry
+from ..anno.base_anno import BaseAnno
+from ..util.utility import dict_to_xml
+from ..util.misc import check_image_label, get_img_name, parse_classmap, check_input_output_folder, parse_img_path
+from ..util.parse_voc_xml import ParseVocXml
+from ..util.logger import setup_logger
 
 
 @registry.ANNOS.register('labelimg')

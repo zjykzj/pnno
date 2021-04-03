@@ -7,5 +7,5 @@
 @description: 
 """
 
-from .anno_processor import AnnoProcessor
+from .processor import Processor
 from .defaults import default_argument_parser

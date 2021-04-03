@@ -2,16 +2,16 @@
 
 """
 @date: 2020/7/14 下午8:34
-@file: anno_processor.py
+@file: processor.py
 @author: zj
 @description: 
 """
 
-from pnno.anno import build_anno
-from pnno.util.logger import setup_logger
+from ..anno import build_anno
+from ..util.logger import setup_logger
 
 
-class AnnoProcessor(object):
+class Processor(object):
     """
     The labeled data is processed to create training data with specified format
     """
@@ -28,7 +28,7 @@ class AnnoProcessor(object):
         logger = self.logger
 
         if verbose:
-            logger.info('Processing original annotation data')
+            logger.info('Processing original data')
         output_data = self.parser.process()
         if verbose:
             logger.info('Save data in specified format')

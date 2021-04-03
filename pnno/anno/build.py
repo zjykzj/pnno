@@ -7,11 +7,13 @@
 @description: 
 """
 
-from pnno.anno import registry
+from . import registry
 from .yolov5_anno import YoLoV5Anno
 from .labelimg_anno import LabelImgAnno
 from .visdrone_anno import VisDroneAnno
 from .tlt_anno import TltAnno
+from .pytorch_imagefolder import ImageFolder
+from .lmdb import LMDB
 
 
 def build_anno(name, cfg):

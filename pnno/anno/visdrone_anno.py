@@ -12,10 +12,10 @@ import glob
 import numpy as np
 import cv2
 
-from pnno.anno import registry
-from pnno.anno.base_anno import BaseAnno
-from pnno.util.misc import check_image_label, check_input_output_folder
-from pnno.util.logger import setup_logger
+from . import registry
+from ..anno.base_anno import BaseAnno
+from ..util.misc import check_image_label, check_input_output_folder
+from ..util.logger import setup_logger
 
 
 @registry.ANNOS.register('visdrone')
@@ -123,7 +123,9 @@ class VisDroneAnno(BaseAnno):
             if anno_obj:
                 anno_data[img_path] = anno_obj
             else:
-                self.logger.info('{} is a annotation object that only contains targets whose annotation type is ignored regions or others'.format(img_path))
+                self.logger.info(
+                    '{} is a annotation object that only contains targets whose annotation type is ignored regions or others'.format(
+                        img_path))
 
         return {'classmap': self.classmap, 'anno_data': anno_data}
 
