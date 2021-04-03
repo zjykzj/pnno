@@ -14,12 +14,18 @@ import argparse
 from ..util.misc import get_version
 
 
-def show_image():
+def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('-f', "--img_file", default="", metavar="IMG_FILE", help="path to img file")
     parser.add_argument('-v', '--version', help='output version information', action="store_true")
 
+    return parser
+
+
+def show_image():
+    parser = parse_args()
     args = parser.parse_args()
+
     if args.version:
         print('pnno: v{}'.format(get_version()))
         sys.exit(0)
