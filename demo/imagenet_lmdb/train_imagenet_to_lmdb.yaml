@@ -1,0 +1,9 @@
+ANNO:
+  PARSER: 'imagefolder'
+  CREATOR: 'lmdb'
+INPUT:
+  DIR: '.'
+  IMAGE_FOLDER: 'train'
+OUTPUT:
+  DIR: '.'
+  IMAGE_FOLDER: 'train'

@@ -12,7 +12,7 @@ from pnno.anno.build import build_anno
 
 
 def imagefolder_to_lmdb():
-    config_file = 'demo/imagefolder_lmdb/imagefolder_to_lmdb.yaml'
+    config_file = 'demo/imagefolder_lmdb/train_imagenet_to_lmdb.yaml'
     cfg.merge_from_file(config_file)
     cfg.freeze()
 
