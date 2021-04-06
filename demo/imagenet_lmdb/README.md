@@ -3,7 +3,7 @@
 
 convert [ImageNet](http://www.image-net.org/) to LMDB
 
-Assume that the train / Val directory is in the current path after Imagenet decompression
+Assume that the train / val directory is in the current path after Imagenet decompression
 
 Execute the following command:
 
@@ -11,7 +11,7 @@ Execute the following command:
 $ bash imagenet_2_lmdb.sh
 ```
 
-if not, you can add the decompression path to `train_imagenet_to_lmdb.yaml/val_imagenet_to_lmdb/yaml`
+if not, you can add the decompression path to `train_imagenet_to_lmdb.yaml` and `val_imagenet_to_lmdb.yaml`
 
 ```
 INPUT:
