@@ -40,7 +40,7 @@ class PytorchImageFolder(BaseAnno):
         data_set = ImageFolder(image_path, loader=raw_reader)
         data_loader = DataLoader(data_set, num_workers=0)
 
-        return {'dataloader': data_loader}
+        return {'dataloader': data_loader, 'classes': data_set.classes}
 
     def save(self, input_data: dict):
         super(PytorchImageFolder, self).save(input_data)

@@ -51,12 +51,13 @@ class LMDB(BaseAnno):
             logger.info(f"Generate LMDB to {lmdb_path}")
 
         data_loader = input_data['dataloader']
-        self.folder2lmdb(lmdb_path, data_loader)
+        classes = input_data['classes']
+        self.folder2lmdb(lmdb_path, data_loader, classes)
 
         if self.verbose:
             logger.info(__name__ + ' done')
 
-    def folder2lmdb(self, dpath, data_loader, write_frequency=5000):
+    def folder2lmdb(self, dpath, data_loader, classes, write_frequency=5000):
         verbose = self.verbose
         logger = self.logger
 
@@ -82,6 +83,7 @@ class LMDB(BaseAnno):
         with db.begin(write=True) as txn:
             txn.put(b'__keys__', dumps_data(keys))
             txn.put(b'__len__', dumps_data(len(keys)))
+            txn.put(b'classes', dumps_data(classes))
 
         if verbose:
             logger.info("Flushing database ...")
