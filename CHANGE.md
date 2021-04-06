@@ -1,6 +1,14 @@
 
 # CHANGE
 
+## v0.3.4
+
+* New features
+  * Add imagefolder_lmdb usage
+  * Add clssses property for imagefolder_lmdb
+* Bug fixes
+* Breaking changes.
+
 ## v0.3.3
 
 * New features
