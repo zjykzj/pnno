@@ -1,6 +1,13 @@
 
 # CHANGE
 
+## v0.3.5
+
+* New features
+  * Use multiple cpu to speed up ImageFolder reading
+* Bug fixes
+* Breaking changes.
+
 ## v0.3.4
 
 * New features
