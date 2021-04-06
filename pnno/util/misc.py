@@ -8,11 +8,16 @@
 """
 
 from .. import __version__
+from multiprocessing import cpu_count
 import os
 
 
 def get_version():
     return __version__
+
+
+def get_cpu_count():
+    return cpu_count()
 
 
 def is_dir(src_dir):
