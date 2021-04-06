@@ -3,6 +3,8 @@
 
 convert [ImageNet](http://www.image-net.org/) to LMDB
 
+## Convert
+
 Assume that the train / val directory is in the current path after Imagenet decompression
 
 Execute the following command:
@@ -21,3 +23,7 @@ OUTPUT:
   DIR: '.'               <------------ here
   IMAGE_FOLDER: 'train'
 ```
+
+## Usage
+
+refer to [ZJCV/ZCls](https://github.com/ZJCV/ZCls)
