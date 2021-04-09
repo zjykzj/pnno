@@ -7,3 +7,5 @@ INPUT:
 OUTPUT:
   DIR: '.'
   IMAGE_FOLDER: 'train'
+IMAGEFOLDER:
+  NUM_WORKERS: -1
