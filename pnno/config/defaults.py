@@ -78,6 +78,8 @@ _C.VISDRONE.ANNO_EXTENSION = '.txt'
 
 _C.IMAGEFOLDER = CN()
 _C.IMAGEFOLDER.NAME = 'imagefolder'
+# Number of processes. default -1, means use half cpus
+_C.IMAGEFOLDER.NUM_WORKERS = -1
 
 # ---------------------------------------------------------------------------- #
 # LMDB
