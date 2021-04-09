@@ -1,6 +1,14 @@
 
 # CHANGE
 
+## v0.3.6
+
+* New features
+  * when write to LMDB, use PIL Image to read image
+  * add NUM_WORKDERS to config process number 
+* Bug fixes
+* Breaking changes.
+
 ## v0.3.5
 
 * New features
