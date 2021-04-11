@@ -8,6 +8,8 @@
 """
 
 import os
+import imageio
+import numpy as np
 from PIL import Image
 from torch.utils.data import DataLoader
 from torchvision.datasets import ImageFolder
@@ -19,9 +21,14 @@ from ..util.misc import get_cpu_count
 
 
 def raw_reader(path):
-    # with open(path, 'rb') as f:
-    #     bin_data = f.read()
-    return Image.open(path).convert('RGB')
+    image = np.array(Image.open(path).convert('RGB'))
+    file_path = f'.{os.path.splitext(os.path.split(path)[1])[0]}.jpg'
+    imageio.imwrite(file_path, image)
+
+    with open(file_path, 'rb') as f:
+        bin_data = f.read()
+    os.remove(file_path)
+    return bin_data
 
 
 # fix TypeError: batch must contain tensors, numbers, dicts or lists; found <class ‘PIL.Image.Image’>
