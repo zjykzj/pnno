@@ -1,6 +1,13 @@
 
 # CHANGE
 
+## v0.3.7
+
+* New features
+  * update raw_reader 
+* Bug fixes
+* Breaking changes.
+
 ## v0.3.6
 
 * New features

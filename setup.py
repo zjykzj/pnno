@@ -21,11 +21,14 @@ DESCRIPTION = "Script for annotation data processing"
 URL = "https://github.com/zjykzj/pnno"
 PYTHON_REQUIRES = ">=3.6"
 INSTALL_REQUIRES = [
+    "Pillow >= 8.1.0",
+    "imageio >= 2.9.0",
     "lmdb >= 1.1.1",
     "numpy >= 1.19.5",
     "opencv_python >= 4.5.1.48",
     "torch >= 1.7.1",
     "torchvision >= 0.8.2",
+    "tqdm >= 4.56.0",
     "xmltodict >= 0.12.0",
     "yacs >= 0.1.8"
 ]
