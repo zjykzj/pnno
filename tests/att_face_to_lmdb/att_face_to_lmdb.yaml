@@ -2,10 +2,10 @@ ANNO:
   PARSER: 'imagefolder'
   CREATOR: 'lmdb'
 INPUT:
-  DIR: 'tests/imagefolder_lmdb'
+  DIR: 'tests/att_face_to_lmdb'
   IMAGE_FOLDER: 'att_faces_png'
 OUTPUT:
-  DIR: 'tests/imagefolder_lmdb'
+  DIR: 'tests/att_face_to_lmdb'
   IMAGE_FOLDER: 'train'
 IMAGEFOLDER:
   NUM_WORKERS: 4

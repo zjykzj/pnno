@@ -2,7 +2,7 @@
 
 """
 @date: 2021/4/3 下午8:40
-@file: imagefolder_lmdb.py
+@file: att_face_to_lmdb.py
 @author: zj
 @description: 
 """
@@ -12,7 +12,7 @@ from pnno.anno.build import build_anno
 
 
 def imagefolder_to_lmdb():
-    config_file = 'tests/imagefolder_lmdb/imagefolder_to_lmdb.yaml'
+    config_file = 'tests/att_face_to_lmdb/att_face_to_lmdb.yaml'
     cfg.merge_from_file(config_file)
     cfg.freeze()
 

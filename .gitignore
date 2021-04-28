@@ -3,4 +3,6 @@
 build/
 dist/
 pnno.egg-info/
-tests/imagefolder_lmdb/att_faces_png/
+tests/att_face_to_lmdb/att_faces_png/
+tests/att_face_to_lmdb/res_png/
+*.lmdb*
