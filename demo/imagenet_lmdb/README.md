@@ -26,4 +26,4 @@ OUTPUT:
 
 ## Usage
 
-refer to [ZJCV/ZCls](https://github.com/ZJCV/ZCls)
+See `tests/att_face_to_lmdb/lmdb_to_att_face.py`. And you can refer to [ZJCV/ZCls](https://github.com/ZJCV/ZCls)
