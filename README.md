@@ -4,6 +4,8 @@
   <a title="Chinese" href="./README.zh-CN.md">🇨🇳</a>
 </div>
 
+## **This repository is no longer maintained. For updated content, please visit: [zjykzj/vocdev](https://github.com/zjykzj/vocdev) and [zjykzj/cocodev](https://github.com/zjykzj/cocodev)**
+
  <div align="center"><a title="" href="https://github.com/zjykzj/pnno"><img align="center" src="./imgs/PNNO.png"></a></div>
 
 <p align="center">
@@ -26,6 +28,7 @@ This repo provides several script tools for the following aspects:
 
 ## Table of Contents
 
+- [**This repository is no longer maintained. For updated content, please visit: zjykzj/vocdev and zjykzj/cocodev**](#this-repository-is-no-longer-maintained-for-updated-content-please-visit-zjykzjvocdev-and-zjykzjcocodev)
 - [Table of Contents](#table-of-contents)
 - [Background](#background)
 - [Install](#install)

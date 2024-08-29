@@ -4,6 +4,8 @@
   <a title="英语" href="./README.md">🇺🇸</a>
 </div>
 
+## ***本仓库不再维护，更新的内容前往：[ zjykzj/vocdev](https://github.com/zjykzj/vocdev)和[ zjykzj/cocodev](https://github.com/zjykzj/cocodev)***
+
  <div align="center"><a title="" href="https://github.com/zjykzj/pnno"><img align="center" src="./imgs/PNNO.png"></a></div>
 
 <p align="center">
@@ -26,6 +28,7 @@
 
 ## 内容列表
 
+- [***本仓库不再维护，更新的内容前往： zjykzj/vocdev和 zjykzj/cocodev***](#本仓库不再维护更新的内容前往-zjykzjvocdev和-zjykzjcocodev)
 - [内容列表](#内容列表)
 - [背景](#背景)
 - [安装](#安装)
